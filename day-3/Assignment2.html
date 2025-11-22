@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assignment2 </title>
+</head>
+
+<body>
+    <form action="server.js">
+        <label for="name">
+            Name:
+            <input type="text" id="name" name="name">
+        </label>
+        <br><br>
+        <label for="male">
+            Sex:
+            <input type="radio" id="male" name="sex" value="Male">Male
+
+        </label>
+        <label for="female">
+            <input type="radio" id="female" name="sex" value="Female"> Female
+        </label>
+        <br><br>
+        <label for="country">Country:</label>
+        <select  name="country" id="country">
+            <option>Select an option</option>
+            <option value="India">India</option>
+            <option value="USA">USA</option>
+            <option value="UK">UK</option>
+            <option value="Canada">Canada</option>
+        </select>
+        <br><br>
+        <label for="Message">
+            Message:<br>
+            <textarea id="Message" name="Message" rows="4" cols="30"></textarea>
+        </label>
+        <br><br>
+        <label for="subscribe">
+            <input type="checkbox" id="subscribe" name="subscribe" value="yes" >  Subscribe?
+        </label>
+        <br><br>
+        <button type="submit">Submit</button>
+    </form>
+</body>
+
+</html>

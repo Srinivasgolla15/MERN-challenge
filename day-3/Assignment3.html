@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assignment 3</title>
+</head>
+<body>
+    <h1>Feedback Form</h1>
+    <form action="server.js">
+        <label for="name">Name:</label>
+        <input type="text" placeholder="write your name" id="name" name="name" >
+        <br><br>
+        <label for="email">Email:</label>
+        <input type="email" placeholder="write your email" id="email" name="email">
+        <br><br>
+        Message:<br>
+        <textarea name="message" rows="4" cols="30"></textarea>
+        <br><br>
+        <label for="rating">Rate us our of 5:</label><br>
+        <label  for="1">
+            <input type="radio" id="1" name="rating" value="1">1</label><br>
+        <label  for="2">
+            <input type="radio" id="2" name="rating" value="2">2</label><br>
+        <label  for="3">
+            <input type="radio" id="3" name="rating" value="3">3</label><br>
+        <label  for="4">
+            <input type="radio" id="4" name="rating" value="4">4</label><br>
+        <label  for="5">
+            <input type="radio" id="5" name="rating" value="5">5</label><br>
+        <br><br>
+
+        <button type="submit">Send your messages!</button>
+    </form>
+</body>
+</html>
