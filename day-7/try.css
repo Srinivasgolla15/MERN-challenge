@@ -1,0 +1,17 @@
+#outer{
+    height: 100px;
+    width: 100px;
+    background-color: aqua;
+    transform: 2s ease-in-out 2s;
+    border: 2px;
+    
+}
+
+#outer:hover{
+    height: 50px;
+    width: 50px;
+    background-color: brown;
+    margin : 0 auto
+    
+
+}
