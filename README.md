@@ -2,5 +2,4 @@
 I am challenging myself to learn mern stack within 150 days with no holidays
 
 day5 checking 
-7dec full tired so no pushes 
 
