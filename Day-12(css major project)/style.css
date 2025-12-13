@@ -2,29 +2,34 @@ body{
     margin:0;
     background-color: black;
     font-family: "Montserrat", sans-serif;
-    color:white;
-    
+    color:white;  
     /* overflow: hidden; */
     /* display:flex; */
 
 }
 
+*{
+    box-sizing: border-box;
+}
+
 .main {
     display: grid;
     grid-template-rows: 4rem 1fr 5rem;
-    grid-template-columns: 260px 1fr;
+    grid-template-columns: 480px 1fr;
     height: 100vh;
-    /* padding: 8px; */
-    /* gap:8px; */
+    padding: 8px; 
+    gap:8px;
     /* box-sizing: border-box; */
     
 }
 
 .header{
+    grid-row: 1;
+    grid-column: 1 /-1;
     color:white;
     background-color: black;
     height: 4rem;
-    position:fixed;
+    /* position:fixed; */
     top:0;
     width:100%;
     display:flex;
@@ -33,6 +38,7 @@ body{
     align-items: center;
     padding:0 1rem;
     overflow: hidden;
+    /* margin-bottom: 10px; */
 
     
 }
@@ -40,7 +46,7 @@ body{
 .headericon {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     
 }
 
@@ -50,6 +56,7 @@ body{
 
 
 .searchstack{
+    justify-self: center;
     display:flex;
     flex-direction: row;
     justify-content:center;
@@ -128,7 +135,7 @@ body{
     display: flex;
     align-items: center;
     flex-direction: row;
-    justify-content:space-end;
+    justify-content:flex-end;
     margin-left: auto;
     /* flex: 1 1 auto;  */
 
@@ -145,7 +152,7 @@ body{
     font-weight: 700;
     font-size: 0.85rem;
     letter-spacing: -0.5px;
-    /* margin-right: 1rem; */
+    margin-right: 1rem;
 }
 
 .badge:hover .placeholder{
@@ -211,7 +218,7 @@ body{
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    margin-right:2rem;
+    /* margin-right:2rem; */
 
 }
 
@@ -220,30 +227,122 @@ body{
 
 .sidebar{
     /* padding: 8px; */
-    background-color: yellow;
-    height:100vh ;
-    width: 350px;
-    overflow: scroll;
+    grid-row: 2;
+    grid-column: 1;
+    background-color: black;
+    /* height: 100vh; */
+    width: auto;
+    resize: horizontal;
+    min-width: 72px;
+    max-width: 420px;
+    overflow-y: scroll;
     /* margin-right:0.3rem; */
     border-radius: 0.5rem;
+    /* border-radius: 0.5rem; */
+    display: flex;
+    flex-direction: column;
     /* margin-top: 8px; */
 
 }
 
-.main_layout{
-    background-color: rgb(221, 114, 27);
-    height:100vh;
+.sidebar:hover .library .close-sidebar{
+    left:0px;
+    opacity:1;
+}
+
+.library {
+    display:flex;
+    align-items: center;             /* Vertically centers everything */
     width: 100%;
-    overflow:scroll;
+    gap: 8px;
+}
+
+.library .close-sidebar{
+    align-self: center;
+    margin-left: 5px;
+    position:relative;
+    left:-100px;
+    transition:left 0.3s ease, opacity 0.3s ease;
+}
+
+.sidebar .library h4{
+    margin-left:12px;
+    position:relative;
+    left:-13px;
+    transition: left 0.4 ease;
+}
+.sidebar:hover .library h4{
+    left: 0;
+}
+
+.sidebarbadge{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    align-self: center;
+    background-color: #242323;
+    opacity: 0.7;
+    height: fit-content;
+    padding: 8px 12px;
+    position: relative;
+    left:100px;
+    border-radius: 30px;
+}
+
+.sidebarbadge:hover{
+    opacity:1;
+}
+
+.expand{
+    background-color: #1f1f1f;
+    color:white;
+    opacity: 0.8;
+    height: fit-content;
+    width:fit-content;
+    border-radius: 50%;
+    display: flex;
+    justify-content: flex-end;
+    padding:12px;
+    align-self: flex-start;
+    align-items: center;
+    
+}
+
+.expand img{
+    display: inline-flex;
+    justify-content: center;
+    align-self: center; 
+}
+
+.create-text{
+    font-weight: 600;
+    font-size: medium;
+}
+
+.sidebarbadge img{
+    margin-right:1rem;
+}
+
+.main_layout{
+    grid-row: 2;
+    grid-column: 2;
+    background-color: rgb(221, 114, 27);
+    /* height:100vh; */
+
+
+    overflow-y:scroll;
     border-radius: 0.5rem;
-    margin:6px;
+    
     
 }
 
 .music_player{
     background-color: rgb(17, 206, 14);
-    height:5rem;
-    position:fixed;
+    grid-row: 3;
+    grid-column: 1
+    / -1;
+    /* height:5rem; */
+    /* position:fixed; */
     bottom:0;
     color:white;
     width:100%;

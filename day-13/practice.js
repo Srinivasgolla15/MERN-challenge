@@ -1,2 +1,1 @@
-let age=23
-age+2
+Today only learned very basics of java script

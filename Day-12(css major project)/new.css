@@ -24,7 +24,7 @@ body {
 .header {
     /* Grid placement: Row 1, Span across all columns */
     grid-row: 1;
-    grid-column: 1 / -1;
+    grid-column: 1 /-1;
 
     background-color: black;
     color: white;
