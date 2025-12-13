@@ -11,12 +11,12 @@ body{
 
 .main {
     display: grid;
-    grid-template-rows: 4rem auto 5rem;
+    grid-template-rows: 4rem 1fr 5rem;
     grid-template-columns: 260px 1fr;
     height: 100vh;
-    padding: 8px;
-    gap:8px;
-    box-sizing: border-box;
+    /* padding: 8px; */
+    /* gap:8px; */
+    /* box-sizing: border-box; */
     
 }
 
@@ -128,9 +128,9 @@ body{
     display: flex;
     align-items: center;
     flex-direction: row;
-    justify-content:space-around;
+    justify-content:space-end;
     margin-left: auto;
-    flex: 1 1 auto; 
+    /* flex: 1 1 auto;  */
 
 }
 
