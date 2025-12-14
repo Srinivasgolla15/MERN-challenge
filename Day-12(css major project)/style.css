@@ -15,7 +15,7 @@ body{
 .main {
     display: grid;
     grid-template-rows: 4rem 1fr 5rem;
-    grid-template-columns: 480px 1fr;
+    grid-template-columns: auto 1fr;
     height: 100vh;
     padding: 8px; 
     gap:8px;
@@ -153,6 +153,7 @@ body{
     font-size: 0.85rem;
     letter-spacing: -0.5px;
     margin-right: 1rem;
+    cursor:pointer;
 }
 
 .badge:hover .placeholder{
@@ -176,6 +177,7 @@ body{
     font-size: 0.85rem;
     letter-spacing: -0.5px;
     margin-right: 1rem;
+    cursor:pointer;
 }
 
 .darkbadge img{
@@ -234,20 +236,21 @@ body{
     width: auto;
     resize: horizontal;
     min-width: 72px;
-    max-width: 420px;
-    overflow-y: scroll;
+    max-width: 480px;
+    overflow-y: auto;
     /* margin-right:0.3rem; */
     border-radius: 0.5rem;
     /* border-radius: 0.5rem; */
     display: flex;
     flex-direction: column;
+    /* padding:0px 16px; */
     /* margin-top: 8px; */
 
 }
 
 .sidebar:hover .library .close-sidebar{
-    left:0px;
-    opacity:1;
+    transform: translateX(7px);
+     opacity: 1; 
 }
 
 .library {
@@ -255,42 +258,59 @@ body{
     align-items: center;             /* Vertically centers everything */
     width: 100%;
     gap: 8px;
+    flex-wrap: wrap;
+    position:sticky;
 }
 
 .library .close-sidebar{
     align-self: center;
     margin-left: 5px;
-    position:relative;
-    left:-100px;
-    transition:left 0.3s ease, opacity 0.3s ease;
+    transform: translateX(-40px); 
+    opacity: 0;
+    transition:transform 0.3s ease, opacity 0.3s ease;
 }
 
 .sidebar .library h4{
     margin-left:12px;
     position:relative;
     left:-13px;
-    transition: left 0.4 ease;
+    transition: left 0.2s ease ;
 }
 .sidebar:hover .library h4{
     left: 0;
 }
 
+@media(max-width:260px){
+    .sidebar .create-text{
+        display:none;
+    }
+}
+
+.library-options{
+  margin-left: auto;         /* moves Create+expand to the right end */
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  
+}
+
+
 .sidebarbadge{
-    display:flex;
-    justify-content: center;
+    display:inline-flex;
+    /* justify-content: center; */
     align-items: center;
-    align-self: center;
+    /* align-self: center; */
     background-color: #242323;
-    opacity: 0.7;
+    /* opacity: 0.7; */
     height: fit-content;
     padding: 8px 12px;
-    position: relative;
-    left:100px;
     border-radius: 30px;
+    cursor: pointer;
 }
 
 .sidebarbadge:hover{
     opacity:1;
+    background-color: #383333;
 }
 
 .expand{
@@ -314,23 +334,85 @@ body{
     align-self: center; 
 }
 
+.expand:hover{
+    background-color: #383333;
+}
+
 .create-text{
-    font-weight: 600;
-    font-size: medium;
+    font-weight: 700;
+    font-size: small;
 }
 
 .sidebarbadge img{
-    margin-right:1rem;
+    margin-right:0.6rem;
 }
 
+.library-options2{
+    margin-left: 1rem;
+}
+
+.library-options2 .sidebarbadge:hover{
+    background-color: #383333;
+}
+
+.Playlists-text,.Artists-text,.Albums-text{
+    font-size: small;
+    font-weight: 600;
+    /* margin-left: 12px; */
+}
+
+.library-search{
+    display:flex;
+    flex-direction: column;
+    align-content: flex-start;
+
+}
+
+.library-search .lib-searchbar{
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 8px ;
+    margin-top: 0.6rem;
+}
+
+.lib-searchbar img{
+    display: inline-flex;
+    align-self: center;
+    margin-left:1rem;
+}
+
+.recents {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  /* opacity: 0.8; */
+}
+
+.recents img{
+    margin:0;
+}
+
+.library-search .recent-text{
+    align-self: center;
+    font-weight: 500;
+    font-size: small;
+    opacity:0.8;
+}
+
+.recents .recent-text img{
+    align-items: center;
+}
+
+
 .main_layout{
-    grid-row: 2;
+    grid-row: 2/-1;
     grid-column: 2;
     background-color: rgb(221, 114, 27);
     /* height:100vh; */
 
 
-    overflow-y:scroll;
+    overflow-y:auto;
     border-radius: 0.5rem;
     
     
