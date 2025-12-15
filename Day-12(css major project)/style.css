@@ -3,7 +3,8 @@ body{
     background-color: black;
     font-family: "Montserrat", sans-serif;
     color:white;  
-    /* overflow: hidden; */
+    overflow: hidden;
+    text-overflow: ellipsis;
     /* display:flex; */
 
 }
@@ -262,7 +263,7 @@ body{
     position:sticky;
     top:0px;
     background-color: black;
-    z-index:20;
+    z-index: 20;
 }
 
 .library .close-sidebar{
@@ -351,7 +352,9 @@ body{
 }
 
 .library-options2{
+    display: flex;
     margin-left: 1rem;
+    gap: 6px;
 }
 
 .library-options2 .sidebarbadge:hover{
@@ -486,13 +489,98 @@ body{
     grid-column: 2;
     background-color: rgb(221, 114, 27);
     /* height:100vh; */
-
-
+    padding:0px 16px;
     overflow-y:auto;
     border-radius: 0.5rem;
-    
-    
 }
+
+.stickynav{
+    display: flex;
+    align-items: center;
+    height:4rem;
+    gap:6px;
+    position: sticky;
+    top:0px
+}
+
+.stickydarkbadge{
+    display:inline-flex;
+    align-items: center;   
+    background-color: #242323;
+    height: fit-content;
+    padding: 8px 12px;
+    border-radius: 999px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: small;
+}
+
+.stickydarkbadge:hover{
+    background-color:#383333 ;
+}
+
+.lightbadge{
+    background-color: white;
+    color: black;
+}
+
+.lightbadge:hover{
+    background-color: #dad2d2;
+}
+
+.main_layout .recentlyplayed{
+    display:grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    justify-content: center;
+    align-items: center;
+    height: 4rem;
+    gap: 6px;
+}
+
+.main_layout .recentlyplayed .first{
+    display: flex;
+    height: 48px;
+    grid-column: 1;
+    background-color:#242323 ;
+    font-weight: 700;
+    font-size: small;
+    /* justify-content: center; */
+    align-items: center;
+    border-radius:6px;
+    gap: 12px;
+}
+
+.recentlyplayed .first:hover{
+    background-color: #383333;
+}
+
+.recentlyplayed .first:hover .monica-label i{
+    opacity: 1;
+}
+
+.recentlyplayed .first .monica-label{
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    width:100%;
+}
+
+.recentlyplayed .first .monica-label i{
+    color:rgb(17, 206, 14);
+    font-size:xx-large;
+    padding-right: 12px;
+    opacity:0;
+    text-shadow: 0 6px 9px rgba(8, 8, 8); 
+}
+
+.main_layout .recentlyplayed .first img{
+    height: 48px;
+    width: 48px;
+    border-top-left-radius: 6px;
+    border-bottom-left-radius: 6px;
+}
+
+
 
 .music_player{
     background-color: rgb(17, 206, 14);
