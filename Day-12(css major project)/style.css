@@ -487,7 +487,7 @@ body{
 .main_layout{
     grid-row: 2/-1;
     grid-column: 2;
-    background-color: rgb(221, 114, 27);
+    background-color: black;
     /* height:100vh; */
     padding:0px 16px;
     overflow-y:auto;
@@ -580,6 +580,49 @@ body{
     border-bottom-left-radius: 6px;
 }
 
+.cards {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-top: 24px;
+  width: 100%;
+}
+
+/* header */
+.cards .headertext {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  width: 100%;
+  /* margin-bottom: 16px; */
+}
+
+.cards .headertext .head {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+}
+
+.cards .headertext .small {
+  font-size: 0.8rem;
+  font-weight: 500;
+  opacity: 0.8;
+}
+
+.cards .headertext h3 {
+  margin: 0;
+  font-size: 1.6rem;
+}
+
+.cards .showall {
+  font-size: 0.85rem;
+  font-weight: 600;
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+
 
 
 .music_player{
@@ -595,5 +638,4 @@ body{
     border-radius: 0.5rem;
      
 }
-
 
