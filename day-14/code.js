@@ -20,3 +20,5 @@ if(string[0]=="a"&&string.length>3){
 else{
     console.log("poor")
 }
+
+

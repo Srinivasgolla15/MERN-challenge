@@ -487,7 +487,7 @@ body{
 .main_layout{
     grid-row: 2/-1;
     grid-column: 2;
-    background-color: black;
+    background-color: orange;
     /* height:100vh; */
     padding:0px 16px;
     overflow-y:auto;
@@ -622,6 +622,76 @@ body{
   cursor: pointer;
 }
 
+.cards .card-container .card {
+    padding: 0.6rem;
+    width: 12rem;
+    border-radius: 6px;
+}
+
+.cards .card-container .card:hover {
+    background-color: #383333;
+}
+
+.cards .card-container {
+    display: flex;
+    gap: 12px;
+}
+
+.cards .card-container .card img {
+    aspect-ratio: 1/1;
+    width: 100%;
+    border-radius: 6px;
+}
+
+.cards .card-container .card span {
+    font-size: small;
+    opacity: 0.8;
+    align-self: self-start;
+}
+
+.cards .card-container .card .card-img {
+    position: relative;
+}
+
+.cards .card-container .card .bg {
+    position: absolute;
+    bottom: 12px;
+    right: 12px;
+    background: black;
+    border: none;
+    border-radius: 50%;
+    padding: 6px;
+    cursor: pointer;
+    height:40px;
+    width: 40px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    opacity: 0;
+    transform: translateY(8px);
+    transition: all 0.2s ease;
+}
+
+.cards .card-container .card:hover .bg {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.cards .card-container .card i {
+    color: rgb(17, 206, 14);
+    font-size: 44px;
+    /* background-color: black; */
+    /* opacity:0; */
+    /* position:absolute;
+    bottom:12px;
+    right:12px; */
+
+}
+
+
+
 
 
 .music_player{
@@ -635,6 +705,7 @@ body{
     color:white;
     width:100%;
     border-radius: 0.5rem;
+    z-index:30;
      
 }
 
