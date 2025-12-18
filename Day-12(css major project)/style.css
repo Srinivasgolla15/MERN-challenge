@@ -584,7 +584,6 @@ body{
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  margin-top: 24px;
   width: 100%;
 }
 
@@ -594,6 +593,7 @@ body{
   justify-content: space-between;
   align-items: baseline;
   width: 100%;
+  margin-top: 24px;
   margin-bottom: 16px;
 }
 
@@ -625,7 +625,7 @@ body{
 .cards .card-container .card {
     padding: 0.6rem;
     width: 12rem;
-    border-radius: 6px;
+    border-radius: 12px;
 }
 
 .cards .card-container .card:hover {
@@ -640,7 +640,7 @@ body{
 .cards .card-container .card img {
     aspect-ratio: 1/1;
     width: 100%;
-    border-radius: 6px;
+    border-radius: 8px;
 }
 
 .cards .card-container .card span {
