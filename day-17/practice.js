@@ -36,13 +36,15 @@
 
 // console.log(car.brand);
 
-const city={
-    name:"srinu",
-    age:20,
-    city:"france"
-}
-console.log(city);
-city.city="india";
+// const city={
+//     name:"srinu",
+//     age:20,
+//     city:"france"
+// }
+// console.log(city);
+// city.city="india";
 
-console.log(city);
+// console.log(city);
+
+
 
