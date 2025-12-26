@@ -11,16 +11,32 @@
 // console.log(avg);
 
 
-// const Even=(n) =>{
-//     if (n%2==0){
-//         console.log("Even");
-//     }else{
-//         console.log("Odd");
-//     }
-// }
+// let num=4;
+// const isEven=(num)=>num%2==0;
+// console.log(isEven(num));
 
-// Even(5);
+// const object = {
+//   message: 'Hello, World!',
 
-let num=4;
-const isEven=(num)=>num%2==0;
-console.log(isEven(num));
+//   logMessage() {
+//     console.log(this.message);
+//   }
+// };
+// console.log(object.logMessage);
+
+// setTimeout(object.logMessage(), 1000);
+
+let length = 4;
+
+function callback() {
+  console.log(this.length);
+}
+
+const object = {
+  length: 5,
+  method(callback) {
+    callback();
+  },
+};
+
+object.method(callback, 1, 2);
