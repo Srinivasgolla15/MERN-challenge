@@ -5,4 +5,5 @@ day5 checking
 7dec full tired so no pushes 
 20dec skip
 26 dec skip
+27th going home 
 
