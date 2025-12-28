@@ -12,5 +12,17 @@
 // let average=summed/arr.length;
 // console.log(average);
 
-let arr=["apple", "banana", "cherry"];
-console.log(arr.map((el)=>el.toUpperCase()));
+// let arr=["apple", "banana", "cherry"];
+// console.log(arr.map((el)=>el.toUpperCase()));
+
+// function doubleAndReturnArgs(arr,...args) {
+//   return [...arr, ...args.map((el)=>el*2)];
+// }
+// console.log(doubleAndReturnArgs([1,2,3],4,5));
+
+function mergeObjects(obj1,obj2){
+  return {...obj1,...obj2};
+}
+let obj1={a:1,b:2};
+let obj2={c:3,d:4};
+console.log(mergeObjects(obj1,obj2));
