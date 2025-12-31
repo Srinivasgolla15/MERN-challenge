@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Name Input</title>
+</head>
+<body>
+
+    <input 
+        type="text" 
+        placeholder="enter your name" 
+        id="nameInput"
+    >
+
+    <h2 id="nameHeading"></h2>
+
+    <script>
+        const input = document.getElementById("nameInput");
+        const heading = document.getElementById("nameHeading");
+
+        input.addEventListener("input", () => {
+            // Remove everything except letters and spaces
+            const cleanedValue = input.value.replace(/[^a-zA-Z ]/g, "");
+
+            // Update input itself (prevents bad chars from staying)
+            input.value = cleanedValue;
+
+            // Update heading
+            heading.textContent = cleanedValue;
+        });
+    </script>
+
+</body>
+</html>

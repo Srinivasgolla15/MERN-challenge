@@ -13,3 +13,4 @@ btn.addEventListener("click",function(){
     container.style.backgroundColor=getRandomColor();
     text.innerText=container.style.backgroundColor;
 })
+
