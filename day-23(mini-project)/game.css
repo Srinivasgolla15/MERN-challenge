@@ -1,0 +1,29 @@
+body{
+    text-align: center;
+}
+
+ .container{
+    display:flex;
+    justify-content: center;
+ }
+
+.red, .yellow, .green, .blue{
+    width:200px;
+    height:200px;
+    border:10px solid black;
+    border-radius: 20px;
+    margin:10px;
+    cursor: pointer;
+}
+.red{
+    background-color: red;
+}
+.yellow{
+    background-color: yellow;
+}
+.green{
+    background-color: green;
+}
+.blue{
+    background-color: blue;
+}
