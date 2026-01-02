@@ -657,9 +657,13 @@ body {
     overflow-x: auto;
     overflow-y: hidden;  /* No vertical in cards */
     padding-bottom: 12px;  /* Scroll margin */
-    scrollbar-width: thin;
-   
+    scrollbar-width: none;
+    width: 100%;
+    max-width: 100%;
 }
+/* .cards .card-container::-webkit-scrollbar { width: 0; height: 0; }
+.cards .card-container::-webkit-scrollbar-track { background: transparent; }
+.cards .card-container::-webkit-scrollbar-thumb { background-color: transparent; } */
 
 .cards .card-container .card img {
     aspect-ratio: 1/1;
