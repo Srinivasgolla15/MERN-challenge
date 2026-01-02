@@ -17,8 +17,10 @@ let btn = document.querySelector("button");
         del_btn.className="delete-btn";
         li.appendChild(del_btn);
     });
-let delete_btn = document.querySelector(".delete-btn");
+// let delete_btn = document.querySelector(".delete-btn");
 
-delete_btn.addEventListener("click",function(event){
-    list.removeChild(event.target.parentElement);
+list.addEventListener("click",function(event){
+    if (event.target.className =="delete-btn"){
+        list.removeChild(event.target.parentElement);
+    }
 })
