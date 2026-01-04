@@ -75,7 +75,7 @@ function checkUserInput(indx) {
             }, 1000);
         }
     } else {
-        document.querySelector("#level-title").innerText = "Game Over! Press any key to restart";
+        document.querySelector("#level-title").innerText = `Game Over! your score was ${level-1} Press any key to restart`;
         document.querySelector("body").style.backgroundColor="red"
         setTimeout(()=>{document.querySelector("body").style.backgroundColor="white"},200) ;
         started = false;
