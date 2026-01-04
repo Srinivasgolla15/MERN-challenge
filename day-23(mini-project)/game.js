@@ -25,6 +25,7 @@ function levelup() {
 function nextsequence() {
 
     acceptingInput = false;
+    document.querySelector("h2").innerText = "Wait for the sequence";
 
     let ranadomIndex = Math.floor(Math.random() * 4);
     // console.log(ranadomIndex);
@@ -39,14 +40,16 @@ function nextsequence() {
             // console.log("flash on", btn);
             setTimeout(() => {
                 btn.classList.remove("flash");
+                if (i == gameseq.length - 1) {
+                    acceptingInput = true;
+                    document.querySelector("h2").innerText = "Your Turn!";
+                }
             }, 250);
         }, i * 500);
-        if (i==gameseq.length-1){
-            acceptingInput=true;
-        }
+
     }
 
-    userseq=[];
+    userseq = [];
 
 }
 
@@ -61,6 +64,27 @@ function btnpress() {
 
     userseq.push(btn.classList[0])
     console.log(userseq);
+    checkUserInput(userseq.length-1);
+}
+
+function checkUserInput(indx) {
+    if (userseq[indx] === gameseq[indx]) {
+        if (userseq.length === gameseq.length) {
+            setTimeout(() => {
+                levelup();
+            }, 1000);
+        }
+    } else {
+        document.querySelector("#level-title").innerText = "Game Over! Press any key to restart";
+        document.querySelector("body").style.backgroundColor="red"
+        setTimeout(()=>{document.querySelector("body").style.backgroundColor="white"},200) ;
+        started = false;
+        gameseq = [];
+        userseq = [];
+        level = 0;
+    }
+
+
 }
 
 let btns = document.querySelectorAll(".btn");
@@ -69,7 +93,7 @@ for (let btn of btns) {
 
 }
 
-// function check(){
-//     if ()
-// }
+ 
+
+
 
