@@ -27,3 +27,7 @@ body{
 .blue{
     background-color: blue;
 }
+.flash{
+    opacity: 0.5;
+    background-color: white;
+}
