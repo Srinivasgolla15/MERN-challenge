@@ -16,14 +16,20 @@
 
 let h1=document.querySelector("h1");
 function colorChange(color,delay){
-    setTimeout(()=>{
+    return new Promise ((resolve,reject)=>{
+        setTimeout(()=>{
         h1.style.color=color;
+        resolve( )
     },delay)
+    });
+    
 }
 
-colorChange(red,1000)
+colorChange("red",1000)
     .then((result)=>{
-        return colorChange(green,1000);
+        return colorChange("green",1000);
     })
-    .then((result)=>{return colorChange(blue,1000);})
-    .catch
+    .then((result)=>{return colorChange("blue",1000);})
+    .catch((error)=>{
+        console.log("error");
+    })
