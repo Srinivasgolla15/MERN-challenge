@@ -14,11 +14,16 @@ body {
     box-sizing: border-box;
 }
 
+.main > * {
+    min-height: 0;    /* critical */
+    min-width: 0;
+}
+
 .main {
     display: grid;
     grid-template-rows: 4rem 1fr 5rem;
     grid-template-columns: auto 1fr;
-    height: 100vh;
+    height:  calc(100vh - 16px); ;
     padding: 8px;
     gap: 8px;
     /* box-sizing: border-box; */
@@ -654,6 +659,7 @@ body {
 .cards .card-container {
     display: flex;
     gap: 12px;
+    flex-wrap: nowrap;
     overflow-x: auto;
     overflow-y: hidden;  /* No vertical in cards */
     padding-bottom: 12px;  /* Scroll margin */
