@@ -57,12 +57,19 @@ colorChange("red",1000)
 //         console.log(error)
 //     })
 
-async function colors(col, delay) {
-    await new Promise(resolve =>
-        setTimeout(resolve, delay)
-    );
-    h2.style.color = col;
+// async function colors(col, delay) {
+//     await new Promise(resolve =>
+//         setTimeout(resolve, delay)
+//     );
+//     h2.style.color = col;
+// }
+
+async function colors(col,delay){
+    setTimeout(()=>{
+        h2.style.color=col;
+    },delay)
 }
+
 
 async function demo() {
     await colors("red", 1000);
