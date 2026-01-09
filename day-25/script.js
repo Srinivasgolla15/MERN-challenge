@@ -64,21 +64,44 @@ colorChange("red",1000)
 //     h2.style.color = col;
 // }
 
-async function colors(col,delay){
-    setTimeout(()=>{
-        h2.style.color=col;
-    },delay)
-}
+// async function colors(col,delay){
+//     setTimeout(()=>{
+//         h2.style.color=col;
+//     },delay)
+// }
 
 
-async function demo() {
-    await colors("red", 1000);
-    await colors("blue", 1000);
-    await colors("green", 1000);
-    await colors("red", 1000);
-}
+// async function demo() {
+//     await colors("red", 1000);
+//     await colors("blue", 1000);
+//     await colors("green", 1000);
+//     await colors("red", 1000);
+// }
 
-demo();
+// demo();
+
+let url="https://catfact.ninja/fact";
+
+fetch(url)
+    .then((res)=>{
+        console.log(res);
+        return res.json()
+    })
+    .then((data)=>{
+        console.log(data.fact);
+        return fetch(url)
+    })
+    .then((res)=>{
+        console.log(res);
+        return res.json()
+    })
+    .then((data1)=>{
+        console.log(data1.fact);
+         
+    })
+    .catch((err)=>{
+        console.log(err)
+    })
 
 
 
