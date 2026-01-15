@@ -8,3 +8,4 @@ day5 checking
 27 dec going home 
 12 jan fever 
 14 jan fever 
+jan 15 skip 
