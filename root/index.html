@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spotify clone</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Anek+Telugu:wght@100..800&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdn.hugeicons.com/font/hgi-stroke-rounded.css" />
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+
+
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+    <div class="main">
+        <div class="header">
+            <div class="headericon"><i class="fa-brands fa-spotify"></i></div>
+            <div class="searchstack">
+                <div class="home"><a href="/"><img alt="home" src="./open-spotify-com/svgexport-2.png" /></a> </div>
+                <div class="searchbar">
+                    <div class="search"><img alt="search" src="./open-spotify-com/svgexport-3.png" /></div> What do you
+                    want to play?
+                    <div class="browse"> <img alt="Browse" src="./open-spotify-com/svgexport-6.png" /> </div>
+                </div>
+            </div>
+            <div class="right-options">
+                <div class="badge">Explore Premium</div>
+                <div class="darkbadge"><img alt="download" src="./open-spotify-com/svgexport-7.png" /> Install App
+                </div>
+                <div class="notification"><img alt="notification" src="./open-spotify-com/svgexport-8.png" /> </div>
+                <div class="friends"><img alt=" friends" src="./open-spotify-com/svgexport-9.png" /> </div>
+                <div class="s">S</div>
+            </div>
+        </div>
+        <div class="sidebar">
+            <div class="library">
+                <img alt="close" class="close-sidebar" src="./open-spotify-com/svgexport-10.png" />
+                <h4>Your Library</h4>
+                <div class="library-options">
+                    <div class="sidebarbadge">
+                        <img alt="plus" src="open-spotify-com/svgexport-11.png" /> <span
+                            class="create-text">Create</span>
+                    </div>
+                    <div class="expand"><img alt="expand" src="./open-spotify-com/svgexport-12.png" /> </div>
+                </div>
+                <div class="library-options2">
+                    <div class="sidebarbadge"> <span class="Playlists-text">Playlists</span></div>
+                    <div class="sidebarbadge"> <span class="Artists-text">Artists</span></div>
+                    <div class="sidebarbadge"> <span class="Albums-text">Albums</span></div>
+                </div>
+            </div>
+            <div class="library-search">
+                <div class="lib-searchbar">
+                    <img alt="search" class="sidebar-search" src="./open-spotify-com/svgexport-15.png" />
+                    <div class="recents">
+                        <span class="recent-text">Recents</span> <img alt="recents"
+                            src="./open-spotify-com/svgexport-16.png" />
+                    </div>
+                </div>
+                <div class="library-data">
+                    <div class="image">
+                        <img alt="Hi nanna" class="library1" src="./assets/album1.png" />
+                        <i class="fa-solid fa-play"></i>
+                    </div>
+                    <div class="data">
+                        <span class="main-text">Hi Nanna</span>
+                        <span class="sub">Album</span>
+                    </div>
+                </div>
+                <div class="library-data">
+                    <div class="image">
+                        <img alt="Ani" class="library1" src="./assets/artist0.png" />
+                        <i class="fa-solid fa-play"></i>
+                    </div>
+                    <div class="data">
+                        <span class="main-text">Anirudh ravichander</span>
+                        <span class="sub">Artist</span>
+                    </div>
+                </div>
+                <div class="library-data">
+                    <div class="image">
+                        <img alt="weekend" class="library1" src="./assets/artist6.png" />
+                        <i class="fa-solid fa-play"></i>
+                    </div>
+                    <div class="data">
+                        <span class="main-text">The Weekend</span>
+                        <span class="sub">Artist</span>
+                    </div>
+                </div>
+                <div class="library-data">
+                    <div class="image">
+                        <img alt="lady" class="library1" src="./assets/artist01.png" />
+                        <i class="fa-solid fa-play"></i>
+                    </div>
+                    <div class="data">
+                        <span class="main-text">Lady Gaga</span>
+                        <span class="sub">Artist</span>
+                    </div>
+                </div>
+                <div class="library-data">
+                    <div class="image">
+                        <img alt="arjit" class="library1" src="./assets/artist2.png" />
+                        <i class="fa-solid fa-play"></i>
+                    </div>
+                    <div class="data">
+                        <span class="main-text">Arjit singh</span>
+                        <span class="sub">Artist</span>
+                    </div>
+                </div>
+                <div class="library-data">
+                    <div class="image">
+                        <img alt="dua" class="library1" src="./assets/artist7.png" />
+                        <i class="fa-solid fa-play"></i>
+                    </div>
+                    <div class="data">
+                        <span class="main-text">Dua Lipa</span>
+                        <span class="sub">Artist</span>
+                    </div>
+                </div>
+                <div class="library-data">
+                    <div class="image">
+                        <img alt="Marron" class="library1" src="./assets/artist9.png" />
+                        <i class="fa-solid fa-play"></i>
+                    </div>
+                    <div class="data">
+                        <span class="main-text">Maroon 5</span>
+                        <span class="sub">Artist</span>
+                    </div>
+                </div>
+                <div class="library-data">
+                    <div class="image">
+                        <img alt="billie" class="library1" src="./assets/artist5.png" />
+                        <i class="fa-solid fa-play"></i>
+                    </div>
+                    <div class="data">
+                        <span class="main-text">Billie Eilish</span>
+                        <span class="sub">Artist</span>
+                    </div>
+                </div>
+                <div class="library-data">
+                    <div class="image">
+                        <img alt="cold" class="library1" src="./assets/artist8.png" />
+                        <i class="fa-solid fa-play"></i>
+                    </div>
+                    <div class="data">
+                        <span class="main-text">Coldplay</span>
+                        <span class="sub">Artist</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="main_layout">
+            <div class="stickynav">
+                <span class="stickydarkbadge lightbadge">All</span>
+                <span class="stickydarkbadge">Music</span>
+                <span class="stickydarkbadge">Podcasts</span>
+            </div>
+
+            <div class="recentlyplayed">
+                <div class="first">
+                    <img alt="monica" src="./assets/recently played1.png" />
+                    <div class="monica-label">
+                        <div class="span">Samayama</div>
+                        <div><i class="fa-solid fa-circle-play"></i></div>
+                    </div>
+                </div>
+                <div class="first" style="grid-column: 2;">
+                    <img alt="monica" src="./assets/recently played.png" />
+                    <div class="monica-label">
+                        <div class="span">Top Tamil Tracks of 2025</div>
+                        <div><i class="fa-solid fa-circle-play"></i></div>
+                    </div>
+                </div>
+                <div class="first" style="grid-column: 3;">
+                    <img alt="monica" src="./assets/recently played2.png" />
+                    <div class="monica-label">
+                        <div class="span">Perfect</div>
+                        <div><i class="fa-solid fa-circle-play"></i></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cards">
+
+                <div class="headertext">
+                    <div class="head">
+                        <span class="small">Made for</span>
+                        <h3>Srinu Srinivas</h3>
+                    </div>
+                    <div class="showall">Show all</div>
+                </div>
+                <div class="card-container">
+                    <div class="card">
+                        <div class="card-img">
+                            <img alt="daily" src="./assets/daily1.png" />
+                            <div title="play-btn" class="bg"><i class="fa-solid fa-circle-play"></i></div>
+                        </div>
+                        <span class="text">Pritam, kritiman Mishra, Jeet Gannuguli and more</span>
+                    </div>
+                    <div class="card">
+                        <div class="card-img">
+                            <img alt="daily" src="./assets/daily2.png" />
+                            <button title="play-btn" class="bg"><i class="fa-solid fa-circle-play"></i></button>
+                        </div>
+                        <span class="text">Jasleen Royal, VIBIE, Amit Trivedi and more</span>
+                    </div>
+                    <div class="card">
+                        <div class="card-img">
+                            <img alt="daily" src="./assets/daily3.png" />
+                            <button title="play-btn" class="bg"><i class="fa-solid fa-circle-play"></i></button>
+                        </div>
+                        <span class="text">A.R.Rahman</span>
+                    </div>
+                    <div class="card">
+                        <div class="card-img">
+                            <img alt="daily" src="./assets/daily4.png" />
+                            <button title="play-btn" class="bg"><i class="fa-solid fa-circle-play"></i></button>
+                        </div>
+                        <span class="text">Taylor Shift, Lady Gaga, Marron 5 and more</span>
+                    </div>
+                    <div class="card">
+                        <div class="card-img">
+                            <img alt="daily" src="./assets/daily5.png" />
+                            <button title="play-btn" class="bg"><i class="fa-solid fa-circle-play"></i></button>
+                        </div>
+                        <span class="text">Anirudh Ravichander</span>
+                    </div>
+                </div>
+
+                <div class="headertext">
+                    <div class="head">
+                        <span class="small"></span>
+                        <h3>Popular Radio</h3>
+                    </div>
+                    <div class="showall">Show all</div>
+                </div>
+                <div class="card-container">
+                    <div class="card">
+                        <div class="card-img">
+                            <img alt="daily" src="./assets/radio station1.png" />
+                            <div title="play-btn" class="bg"><i class="fa-solid fa-circle-play"></i></div>
+                        </div>
+                        <span class="text">With Ellie Goulding and Lady Gaga and more...</span>
+                    </div>
+                    <div class="card">
+                        <div class="card-img">
+                            <img alt="daily" src="./assets/radio station2.png" />
+                            <button title="play-btn" class="bg"><i class="fa-solid fa-circle-play"></i></button>
+                        </div>
+                        <span class="text"> With DJ Snake and more...</span>
+                    </div>
+                    <div class="card">
+                        <div class="card-img">
+                            <img alt="daily" src="./assets/radio station3.png" />
+                            <button title="play-btn" class="bg"><i class="fa-solid fa-circle-play"></i></button>
+                        </div>
+                        <span class="text">With Justin Biber, ColdPlay and more...</span>
+                    </div>
+                    <div class="card">
+                        <div class="card-img">
+                            <img alt="daily" src="./assets/radio station 4.png" />
+                            <button title="play-btn" class="bg"><i class="fa-solid fa-circle-play"></i></button>
+                        </div>
+                        <span class="text"> With sachin-jager, Pritam and more...</span>
+                    </div>
+                    <div class="card">
+                        <div class="card-img">
+                            <img alt="daily" src="./assets/radio station5.png" />
+                            <button title="play-btn" class="bg"><i class="fa-solid fa-circle-play"></i></button>
+                        </div>
+                        <span class="text"> With weekend, styleman and more... </span>
+                    </div>
+                    <div class="card">
+                        <div class="card-img">
+                            <img alt="daily" src="./assets/radio station6.png" />
+                            <button title="play-btn" class="bg"><i class="fa-solid fa-circle-play"></i></button>
+                        </div>
+                        <span class="text">With bilile ellish , Maroon 5 and more...</span>
+                    </div>
+                    <div class="card">
+                        <div class="card-img">
+                            <img alt="daily" src="./assets/radio station7.png" />
+                            <button title="play-btn" class="bg"><i class="fa-solid fa-circle-play"></i></button>
+                        </div>
+                        <span class="text">With Anirudh Ravichander, sachin sagar ,sean and more...</span>
+                    </div>
+                </div>
+
+
+                <div class="headertext">
+                    <div class="head">
+                        <span class="small"> </span>
+                        <h3>India's Best</h3>
+                    </div>
+                    <div class="showall">Show all</div>
+                </div>
+                <div class="card-container">
+                    <div class="card">
+                        <div class="card-img">
+                            <img alt="daily" src="./assets/Top1.png" />
+                            <div title="play-btn" class="bg"><i class="fa-solid fa-circle-play"></i></div>
+                        </div>
+                        <span class="text"> The most streamed  Tracks of 2025 India</span>
+                    </div>
+                    <div class="card">
+                        <div class="card-img">
+                            <img alt="daily" src="./assets/top2.png" />
+                            <button title="play-btn" class="bg"><i class="fa-solid fa-circle-play"></i></button>
+                        </div>
+                        <span class="text"> The most streamed  Hindi Tracks of 2025</span>
+                    </div>
+                    <div class="card">
+                        <div class="card-img">
+                            <img alt="daily" src="./assets/top3.png" />
+                            <button title="play-btn" class="bg"><i class="fa-solid fa-circle-play"></i></button>
+                        </div>
+                        <span class="text">The most streamed  Malayalam Tracks of 2025</span>
+                    </div>
+                    <div class="card">
+                        <div class="card-img">
+                            <img alt="daily" src="./assets/top4.png" />
+                            <button title="play-btn" class="bg"><i class="fa-solid fa-circle-play"></i></button>
+                        </div>
+                        <span class="text"> The most streamed  Telugu Tracks 2025</span>
+                    </div>
+                    <div class="card">
+                        <div class="card-img">
+                            <img alt="daily" src="./assets/top5.png" />
+                            <button title="play-btn" class="bg"><i class="fa-solid fa-circle-play"></i></button>
+                        </div>
+                        <span class="text"> The most streamed Marathi Tracks of 2025</span>
+                    </div>
+                    <div class="card">
+                        <div class="card-img">
+                            <img alt="daily" src="./assets/top6.png" />
+                            <button title="play-btn" class="bg"><i class="fa-solid fa-circle-play"></i></button>
+                        </div>
+                        <span class="text"> The most streamed  Kannada Tracks of 2025</span>
+                    </div>
+                    <div class="card">
+                        <div class="card-img">
+                            <img alt="daily" src="./assets/top7.png" />
+                            <button title="play-btn" class="bg"><i class="fa-solid fa-circle-play"></i></button>
+                        </div>
+                        <span class="text"> The most streamed  Haryani Tracks of 2025</span>
+                    </div>
+                    <div class="card">
+                        <div class="card-img">
+                            <img alt="daily" src="./assets/top8.png" />
+                            <button title="play-btn" class="bg"><i class="fa-solid fa-circle-play"></i></button>
+                        </div>
+                        <span class="text"> The most streamed  Bhojpuri Tracks of 2025</span>
+                    </div>
+
+                    <!-- <div class="headertext">
+                    <div class="head">
+                        <span class="small"> </span>
+                        <h3>Popular Mixes</h3>
+                    </div>
+                    <div class="showall">Show all</div>
+                </div>
+                <div class="card-container">
+                    <div class="card">
+                        <div class="card-img">
+                            <img alt="daily" src="./assets/mix1.png" />
+                            <div title="play-btn" class="bg"><i class="fa-solid fa-circle-play"></i></div>
+                        </div>
+                        <span class="text">Mega Hit Mix</span>
+                    </div>
+                    <div class="card">
+                        <div class="card-img">
+                            <img alt="daily" src="./assets/mix2.png" />
+                            <button title="play-btn" class="bg"><i class="fa-solid fa-circle-play"></i></button>
+                        </div>
+                        <span class="text"> The Ultimate Hit Mix</span>
+                    </div>
+                    <div class="card">
+                        <div class="card-img">
+                            <img alt="daily" src="./assets/mix3.png" />
+                            <button title="play-btn" class="bg"><i class="fa-solid fa-circle-play"></i></button>
+                        </div>
+                        <span class="text">The most streamed  Malayalam Tracks of 2025</span>
+                    </div>
+                    <div class="card">
+                        <div class="card-img">
+                            <img alt="daily" src="./assets/mix4.png" />
+                            <button title="play-btn" class="bg"><i class="fa-solid fa-circle-play"></i></button>
+                        </div>
+                        <span class="text">All Out 10s</span>
+                    </div>
+                    <div class="card">
+                        <div class="card-img">
+                            <img alt="daily" src="./assets/mix5.png" />
+                            <button title="play-btn" class="bg"><i class="fa-solid fa-circle-play"></i></button>
+                        </div>
+                        <span class="text"> All Out 20s</span>
+                    </div>
+                    <div class="card">
+                        <div class="card-img">
+                            <img alt="daily" src="./assets/mix6.png" />
+                            <button title="play-btn" class="bg"><i class="fa-solid fa-circle-play"></i></button>
+                        </div>
+                        <span class="text">#GRWM International</span>
+                    </div>
+                    <div class="card">
+                        <div class="card-img">
+                            <img alt="daily" src="./assets/mix7.png" />
+                            <button title="play-btn" class="bg"><i class="fa-solid fa-circle-play"></i></button>
+                        </div>
+                        <span class="text">Girl Power Karoake</span>
+                    </div>
+                    <div class="card">
+                        <div class="card-img">
+                            <img alt="daily" src="./assets/mix8.png" />
+                            <button title="play-btn" class="bg"><i class="fa-solid fa-circle-play"></i></button>
+                        </div>
+                        <span class="text"> The Viral Throwbacks</span>
+                    </div> -->
+
+
+                </div>
+                <div class="line"></div>
+                <div class="bottom_bar">
+
+                    <div class="content">
+                        <div class="list">
+                            <ul>
+                                <li>Company</li>
+                                <li>About</li>
+                                <li>Jobs</li>
+                                <li>For the Record</li>
+                            </ul>
+                        </div>
+                        <div class="list">
+                            <ul>
+                                <li>Communities</li>
+                                <li>For Artists</li>
+                                <li>Developers</li>
+                                <li>Advertising</li>
+                                <li>Investors</li>
+                                <li>Vendors</li>
+                            </ul>
+                        </div>
+                        <div class="list">
+                            <ul>
+                                <li>Useful links</li>
+                                <li>Support</li>
+                                <li>Free Mobile App</li>
+                                <li>Popular by Country</li>
+                                <li>Import your music</li>
+                            </ul>
+                        </div>
+                        <div class="list">
+                            <ul>
+                                <li>Spotify Plans</li>
+                                <li>Premium Lite</li>
+                                <li>Premium Standard</li>
+                                <li>Premium Student</li>
+                                <li>Spotify Free</li>
+                            </ul>
+                        </div>
+                        <div class="socials">
+                            <div class="icon"><i class="fa-brands fa-instagram"></i></div>
+                            <div class="icon"><i class="fa-brands fa-twitter"></i></div>
+                            <div class="icon"><i class="fa-brands fa-facebook"></i></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="line"></div>
+
+            </div>
+            <div class="footer">
+                <div class="left">
+                    <span>Legal</span>
+                    <span>Safety & Privacy Center</span>
+                    <span>Privacy Policy</span>
+                    <span>Cookies</span>
+                    <span>About Ads</span>
+                    <span>Accessibility</span>
+                </div>
+                <div class="right">
+                    <span>© 2024 Spotify AB</span>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="music_player">
+            <div class="left">
+                <div class="album_art">
+                    <img alt="current playing" src="assets/recently played1.png" />
+                </div>
+                <div class="song_info">
+                    <a class="song_title">Samayama</a>
+                    <div class="song_artists">
+                        <a class="artists" href="https://en.wikipedia.org/wiki/Anurag_Kulkarni">Anurag Kulkarni </a>
+                        <span>,</span>
+                        <a class="artists" href="https://en.wikipedia.org/wiki/Sithara_(singer)">Sithara
+                            krishnaKumar</a>
+                    </div>
+                </div>
+                <div class="favorite">
+                    <!-- <img alt="add to playlist" src="open-spotify-com/svgexport-20.png"/> -->
+                    <!-- <i class="fa-solid fa-circle-plus"></i> -->
+                    <i class="hgi hgi-stroke hgi-plus-sign-circle"></i>
+
+                </div>
+            </div>
+            <div class="center">
+                <div class="top">
+                    <i data-lucide="shuffle" class="shuffle"></i>
+                    <i class="fa-solid fa-backward-step" class="forward"></i>
+                    <div class="playbtn">
+                        <i class="fa-solid fa-circle-play" ></i>
+                        <!-- <i class="fa-solid fa-circle-pause"></i> -->
+                    </div>
+                    <i class="fa-solid fa-forward-step" class=""></i>
+                    <i data-lucide="repeat" class="repeat"></i>
+                </div>
+                <div class="bottom">
+                    <span class="current-time">0:00</span>
+                    <div class="progress-bar">
+                    </div>
+                    <span class="total-time">3:26</span>
+                </div>
+
+
+
+            </div>
+
+            <div class="right">
+                <img alt="lyrics" src="open-spotify-com/svgexport-26.png" />
+                <img alt="queue" src="open-spotify-com/svgexport-27.png" />
+                <img alt="connect" src="open-spotify-com/svgexport-28.png"/>
+                <div class="volume">
+                    <img alt="volume" src="open-spotify-com/svgexport-29.png" />
+                    <div class="volume-bar">
+                        <div class="circle"></div>
+                    </div>
+                    
+                </div>
+                <img alt="mini" src="open-spotify-com/svgexport-30.png" />
+                <img alt="fullscreen" src="open-spotify-com/svgexport-31.png" />
+            </div>
+        </div>
+    </div>
+    <script>
+        lucide.createIcons();
+    </script>
+    <script src="script.js"></script>
+</body>
+
+</html>
