@@ -5,6 +5,9 @@ const port=3000;
 const path=require('path');
 const {v4:uuidv4}=require('uuid');
 uuidv4();
+const method_ovverride=require('method-override');
+
+app.use(method_ovverride('_method'));
 
 app.use(express.urlencoded({ extended: true }));
 
@@ -61,6 +64,19 @@ app.patch('/posts/:id',(req,res)=>{
     let post= posts.find(p=> id===p.id);
     let {caption}=req.body;
     post.caption=caption;
+    res.redirect('/posts');
+});
+
+app.get('/posts/:id/edit',(req,res)=>{
+    let {id}=req.params;
+    let post=posts.find(p=> id===p.id);
+    res.render('edit.ejs',{post});
+     
+});
+
+app.delete('/posts/:id',(req,res)=>{
+    let {id}=req.params;
+    posts=posts.filter(p=> p.id!==id);
     res.redirect('/posts');
 });
 
