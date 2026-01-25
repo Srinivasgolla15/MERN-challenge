@@ -3,25 +3,26 @@ const { url } = require('inspector');
 const app=express();
 const port=3000;
 const path=require('path');
-
+const {v4:uuidv4}=require('uuid');
+uuidv4();
 
 app.use(express.urlencoded({ extended: true }));
 
 
 let posts=[
     {
-        id:11,
+        id:uuidv4(),
         username:"john_doe",
         caption:"Enjoying the sunny day!",
         
     },
     {
-        id:2,
+        id:uuidv4(),
         username:"jane_smith",
         caption:"Loving this new recipe I tried."
         },
     {
-        id:3,
+        id:uuidv4(),
         username:"alex_92",
         caption:"Just finished a great workout!"
     }
@@ -42,19 +43,29 @@ app.get('/posts/new',(req,res)=>{
     res.render('form.ejs');
 });
 
+app.post('/posts',(req,res)=>{
+     let { username, caption } = req.body;
+     let id=uuidv4();
+     posts.push({ id,username, caption });
+     res.redirect('/posts');
+});
+
 app.get('/posts/:id',(req,res)=>{
     let {id}=req.params;
-    let post= posts.find(p=> id===p.id.toString());
+    let post= posts.find(p=> id===p.id);
     res.render('post.ejs',{post});
 });
 
-
-
-app.post('/posts',(req,res)=>{
-     let { username, caption } = req.body;
-     posts.push({ username, caption });
-     res.redirect('/posts');
+app.patch('/posts/:id',(req,res)=>{
+    let {id}=req.params;
+    let post= posts.find(p=> id===p.id);
+    let {caption}=req.body;
+    post.caption=caption;
+    res.redirect('/posts');
 });
+
+
+
 
 
 app.listen(port,()=>{
