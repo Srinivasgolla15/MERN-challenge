@@ -10,7 +10,7 @@
 
 <body>
      <div>
-            <button>Create post</button>
+            <button><a href="http://localhost:3000/posts/new">Create post</a></button>
         </div>
     <h1>Quora Posts</h1>
       <% for(let post of posts) { %>
@@ -22,6 +22,8 @@
                 <%=post.caption %>
             </p>
         </div>
+        <a href="http://localhost:3000/posts/<%=post.id %>">Read More</a>
+        <br><br>
        
         <%}%>
 
