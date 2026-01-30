@@ -4,6 +4,8 @@ const express = require('express');
 const app=express();
 const path = require('path');
 const methodOverride = require('method-override');
+const { v4: uuidv4 } = require('uuid');
+uuidv4();
 
 app.use(methodOverride('_method'));
 app.use(express.urlencoded({extended:true}))
@@ -46,7 +48,7 @@ app.get("/",(req,res)=>{
 
 app.get("/users",(req,res)=>{
 
-    let q =`SELECT id,username,email FROM user`;
+    let q =`SELECT id,username,email FROM user order by username DESC`;
     try{
         connection.query(q,(err,result) =>{
             if (err) throw err;
@@ -100,6 +102,40 @@ app.patch("/users/:id",(req,res)=>{
         console.log(err);
     }
 
+});
+
+app.get("/users/adduser",(req,res)=>{
+    res.render("adduser.ejs");
+});
+
+app.post("/users/adduser",(req,res)=>{
+    let {newUser,email,password} = req.body;
+    let id=uuidv4();
+    let q= `INSERT INTO user VALUES ('${id}','${newUser}','${email}','${password}')`;
+    try{
+        connection.query(q,(err,result) => {
+            if (err) throw err;
+            res.redirect("/users");
+        });
+    }catch(err){
+        console.log(err);
+    }
+
+ });
+
+
+ app.delete("/users/:id",(req,res)=>{
+    let { id } = req.params;
+    let q = `DELETE FROM user WHERE id = '${id}'`;
+    try{
+        connection.query(q,(err,result) =>{
+            if (err) throw err;
+            console.log(result.affectedRows);
+            res.redirect("/users");
+        });
+    }catch(err){
+        console.log(err);
+    }
 });
 
 

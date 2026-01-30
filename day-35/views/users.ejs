@@ -8,7 +8,9 @@
 </head>
 
 <body>
-    <button > Add User </button>
+    <form method="GET" action="/users/adduser">
+        <button type="submit">Add User</button>
+    </form>
     <table>
         <tr>
             <th>username</th>
@@ -31,7 +33,7 @@
                     </form>
                 </td>
                 <td>
-                    <form method="POST" action="/users/<%=user.id%>/edit?_method=DELETE">
+                    <form method="POST" action="/users/<%=user.id%>?_method=DELETE">
                         <button type="submit">delete</button>
                     </form>
                 </td>
