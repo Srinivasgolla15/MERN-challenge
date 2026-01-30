@@ -3,9 +3,10 @@ const mysql = require('mysql2');
 const express = require('express');
 const app=express();
 const path = require('path');
+const methodOverride = require('method-override');
 
-
-
+app.use(methodOverride('_method'));
+app.use(express.urlencoded({extended:true}))
 app.set("view engine","ejs");
 app.set("views",path.join(__dirname,"views"));
 let getrandomuser = () => {
@@ -72,6 +73,33 @@ app.get("/users/:id/edit",(req,res)=>{
     }catch(err){
         console.log(err);
     }
+});
+
+app.patch("/users/:id",(req,res)=>{
+    let {id}=req.params;
+    let q = `SELECT * FROM user WHERE id = '${id}'`;
+    // let q= `UPDATE user set username = ${req.body.username}, password=${req.body.password} WHERE id='${id}'`;
+    try{
+        connection.query(q,(err,result) =>{
+            if (err) throw err;
+            let user = result[0];
+            let { username:formuser,password:formpass}=req.body;
+            if (formpass!=user.password){
+                res.send("password incorrect");
+                res.redirect(`/users/${id}/edit`);
+            }else{
+                let updatequery=`UPDATE user set username = '${formuser}' WHERE id='${id}'`;
+                connection.query(updatequery,(err2,result2)=>{
+                    if (err2) throw err2;
+                    // res.send( result2);
+                    res.redirect("/users");
+                });
+            }
+        })
+    }catch(err){
+        console.log(err);
+    }
+
 });
 
 
