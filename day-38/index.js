@@ -7,6 +7,7 @@ const Chat = require('./chat.js');
 
 app.set('views',path.join(__dirname,'views'));
 app.set('view engine','ejs');
+app.use(express.static(path.join(__dirname,'public')));
 
 main().then(() => console.log("Connected to MongoDB")).
 catch(err=>console.log(err));
@@ -26,6 +27,11 @@ Chat1.save().then(() => console.log("Chat saved")).catch(err => console.log(err)
 app.get("/",(req,res)=>{
     res.send("Root is Running");
 })
+
+app.get("/chats",async (req,res)=>{
+    let chats = await Chat.find();
+    res.render('chats.ejs',{chats});
+});
 
 app.listen(3000,()=>{
     console.log("Server is running on port 3000");
