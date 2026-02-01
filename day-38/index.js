@@ -1,13 +1,27 @@
 const express = require('express');
 const app=express();
 const mongoose = require('mongoose');
+const path = require('path');
+const Chat = require('./chat.js');
+ 
 
+app.set('views',path.join(__dirname,'views'));
+app.set('view engine','ejs');
 
 main().then(() => console.log("Connected to MongoDB")).
 catch(err=>console.log(err));
 async function main() {
-    await mongoose.connect('mondodb://127.0.0.1:27017/Whatsapp');
+    await mongoose.connect('mongodb://127.0.0.1:27017/Whatsapp');
 }
+
+let Chat1 = new Chat({
+    from: "Alice",
+    to: "Bob",
+    msg: "Hello Bob! This is Alice.",
+    created_at: new Date(),
+});
+
+Chat1.save().then(() => console.log("Chat saved")).catch(err => console.log(err));
 
 app.get("/",(req,res)=>{
     res.send("Root is Running");
