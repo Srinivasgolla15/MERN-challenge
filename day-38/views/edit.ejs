@@ -10,7 +10,7 @@
     <p>From:
         <%= chat.from %> to <%= chat.to %>
     </p>
-    <form method="POST" action="/chats/:<%=chat._id%>">
+    <form method="POST" action="/chats/<%=chat._id%>?_method=PUT">
         <textarea name="msg" cols="30" rows="10"><%= chat.msg %></textarea><br>
         <button> edit </button>
     </form>
