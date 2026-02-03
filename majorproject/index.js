@@ -27,18 +27,10 @@ app.set('views', path.join(__dirname, 'views'));
 app.get("/",(req,res)=>{
     res.send("welcome")
 })
-
-app.get("/testlistings",async(req,res)=>{
-    let samplelisting = new Listing({
-        title: "my new home",
-        description: "by the beach",
-        price:1200,
-        location:"calangute , Goa",
-        country:"India",
-    })
-
-    await samplelisting.save();
-    res.send("testing success")
+//index route
+app.get("/listings",async(req,res)=>{
+    const allListings = await Listing.find({});
+    res.render("listings.ejs",{aallListings});
 })
 
 //server
