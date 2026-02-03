@@ -1,19 +1,20 @@
-const sessionIdToUserMap = new Map();
+const jwt = require("jsonwebtoken");
+const JWT_SECRET = "supersecretkey";
 
-function setUser(sessionId, userId) {
-    sessionIdToUserMap.set(sessionId, userId);
+function generateToken(user) {
+    return jwt.sign({
+        userId : user._id
+    },JWT_SECRET,  
+    );
+    
 }
 
-function getUser(sessionId) {
-    return sessionIdToUserMap.get(sessionId);
+function verifyToken(token ) {
+     return jwt.verify(token,JWT_SECRET);
 }
 
-function deleteUser(sessionId) {
-    sessionIdToUserMap.delete(sessionId);
-}
+
 
 module.exports = {
-    setUser,
-    getUser,
-    deleteUser
+    generateToken,verifyToken
 };

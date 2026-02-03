@@ -1,7 +1,7 @@
 const { v4: uuidv4 } = require('uuid');
 const bcrypt = require('bcrypt');
 const User = require('../models/user');
-const { setUser, deleteUser } = require('../service/auth');
+const { generateToken,verifyToken } = require('../service/auth');
 
 async function handleUserSignup(req, res) {
     const { name, email, password } = req.body;
@@ -35,21 +35,14 @@ async function handleUserLogin(req, res) {
         return res.status(401).send({ message: 'Invalid email or password' });
     }
 
-    const sessionId = uuidv4();
-    setUser(sessionId, user._id);
+    const token = generateToken(user);
 
-    res.cookie('uid', sessionId, { httpOnly: true });
+    res.cookie('token', token, { httpOnly: true,  sameSite: 'lax'  });
     res.redirect('/');
 }
 
 async function handleUserLogout(req, res) {
-    const sessionId = req.cookies.uid;
-    if (sessionId) {
-        deleteUser(sessionId);
-        res.clearCookie('uid');
-    }
-
-    
+    res.clearCookie("token");
     res.redirect('/login');
 }
 

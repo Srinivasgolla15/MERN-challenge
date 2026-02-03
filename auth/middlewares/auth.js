@@ -1,24 +1,27 @@
-const { getUser } = require('../service/auth');
+
 const User = require('../models/user');
+const {verifyToken} = require("../service/auth")
 
 async function checkAuth(req, res, next) {
-    const sessionId = req.cookies.uid;
-    if (!sessionId) {
-        return res.redirect('/login');
-    }
+    const token = req.cookies.token;
+     if(!token){
+        return res.redirect("/login");
+     }
 
-    const userId = getUser(sessionId);
-    if (!userId) {
-        return res.redirect('/login');
-    }
+     try{
+        const decoded = verifyToken(token);
+        const user = await User.findById(decoded.userId);
+        if(!user){
+            return res.redirect("/login");
+        }
+        req.user = user;
+        next();
+     }catch(err){
+        console.log("err",err);
+     }
 
-    const user = await User.findById(userId);
-    if (!user) {
-        return res.redirect('/login');
-    }
-
-    req.user = user;
-    next();
+    
+    
 }
 
 module.exports = {checkAuth};
