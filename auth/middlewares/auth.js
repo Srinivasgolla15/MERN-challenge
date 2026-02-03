@@ -1,15 +1,24 @@
-const {getUser} = require('../service/auth');
+const { getUser } = require('../service/auth');
+const User = require('../models/user');
 
-async function restrictToLoggedinUserOnly(req,res,next) {
-    const userUid = req.cookies.uid;
+async function checkAuth(req, res, next) {
+    const sessionId = req.cookies.uid;
+    if (!sessionId) {
+        return res.redirect('/login');
+    }
 
-    if(!userUid) return res.redirect("/login");
+    const userId = getUser(sessionId);
+    if (!userId) {
+        return res.redirect('/login');
+    }
 
-    const user = getUser(userUid);
-    if(!user) return res.redirect("/login");
+    const user = await User.findById(userId);
+    if (!user) {
+        return res.redirect('/login');
+    }
 
     req.user = user;
     next();
 }
 
-module.exports = { restrictToLoggedinUserOnly };
+module.exports = {checkAuth};

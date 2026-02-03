@@ -1,18 +1,19 @@
-const { v4: uuidv4 } = require('uuid');
 const sessionIdToUserMap = new Map();
 
-function setUser(user){
-    const sessionId = uuidv4();
-    sessionIdToUserMap.set(sessionId, user);
-    return sessionId;
+function setUser(sessionId, userId) {
+    sessionIdToUserMap.set(sessionId, userId);
 }
 
-function getUser(sessionId){
+function getUser(sessionId) {
     return sessionIdToUserMap.get(sessionId);
 }
 
-function deleteUser(sessionId){
-    return sessionIdToUserMap.delete(sessionId);
+function deleteUser(sessionId) {
+    sessionIdToUserMap.delete(sessionId);
 }
 
-module.exports={ setUser, getUser, deleteUser };
+module.exports = {
+    setUser,
+    getUser,
+    deleteUser
+};

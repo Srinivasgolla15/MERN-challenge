@@ -1,31 +1,35 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const methodOverride = require('method-override');
-const userRoutes = require('./routes/user');
 const path = require('path');
 const cookieParser = require('cookie-parser');
+
 const staticRoutes = require('./routes/staticRoutes');
-const {restrictToLoggedinUserOnly} = require("./middlewares/auth");
+const userRoutes = require('./routes/user');
 
 const app = express();
 
-async function main(){
+// DB connection
+main().catch(err => console.log(err));
+async function main() {
     await mongoose.connect('mongodb://127.0.0.1:27017/AuthDB');
     console.log("Connected to MongoDB");
 }
 
-main().catch(err=>console.log(err));
-
-app.use(cookieParser());
-app.use(staticRoutes);
+// ---------- MIDDLEWARES ----------
+app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());              // ✅ MUST come before routes
 app.use(methodOverride('_method'));
-app.use(express.urlencoded({extended:false}));
-app.set('view engine', 'ejs');
-app.set('views',path.join(__dirname,'views'));
 
+// ---------- VIEW ENGINE ----------
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
+
+// ---------- ROUTES ----------
+app.use('/', staticRoutes);
 app.use('/', userRoutes);
 
-
+// ---------- SERVER ----------
 app.listen(3000, () => {
     console.log("Server is running on port 3000");
 });
