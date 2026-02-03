@@ -3,9 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Home</title>
 </head>
 <body>
-    <h1>Welcome Budyy!</h1>
+    <h1>Welcome Buddy!</h1>
+    <% if(typeof user !== 'undefined') { %>
+        <p>Hello, <%= user.name %>!</p>
+    <% } %>
+    <a href="/user/logout">Logout</a>
 </body>
 </html>

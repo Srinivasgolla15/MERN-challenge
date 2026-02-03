@@ -1,30 +1,47 @@
 const User = require('../models/user');
-const {v4: uuidv4} = require('uuid');
+const { setUser, deleteUser } = require('../service/auth');
 
-async function handleUserSignup(req,res){
-    let {name, email, password} = req.body;
+async function handleUserSignup(req, res) {
+    let { name, email, password } = req.body;
     try {
-        let user = new User({name, email, password});
+        let user = new User({ name, email, password });
         await user.save();
-        res.status(201).send({message: 'User created successfully'});
+        res.status(201).send({ message: 'User created successfully' });
     } catch (error) {
-        res.status(400).send({error: error.message});
+        res.status(400).send({ error: error.message });
     }
 }
 
-async function handleUserLogin(req,res){
-    let {email, password} = req.body;
-    const user = await User.findOne({email});
-    try{
-        if(user && user.password === password){
-            res.status(200).send({message: 'Login successful'});
-        } else {
-            res.status(401).send({message: 'Invalid email or password'});
+async function handleUserLogin(req, res) {
+    let { email, password } = req.body;
+    try {
+        const user = await User.findOne({ email });
+        
+        if (!user) {
+            return res.status(401).send({ message: 'Invalid email or password' });
         }
-    }catch(err){
-        res.send({error: err.message});
+
+        const isPasswordValid = await user.comparePassword(password);
+        
+        if (isPasswordValid) {
+            const sessionId = setUser(user);
+            res.cookie('uid', sessionId);
+            return res.status(200).redirect('/');
+        } else {
+            return res.status(401).send({ message: 'Invalid email or password' });
+        }
+    } catch (err) {
+        return res.status(500).send({ error: err.message });
     }
-    res.render('home');
 }
 
-module.exports = { handleUserSignup,handleUserLogin };
+async function handleUserLogout(req, res) {
+    const userUid = req.cookies.uid;
+    if (userUid) {
+        deleteUser(userUid);
+        res.clearCookie('uid');
+    }
+    return res.redirect('/login');
+}
+
+module.exports = { handleUserSignup, handleUserLogin, handleUserLogout };

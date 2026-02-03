@@ -1,14 +1,14 @@
 const express = require('express');
-const app = express();
 const mongoose = require('mongoose');
 const methodOverride = require('method-override');
 const userRoutes = require('./routes/user');
 const path = require('path');
 const cookieParser = require('cookie-parser');
-app.use(cookieParser());
 const staticRoutes = require('./routes/staticRoutes');
-app.use(staticRoutes);
 const {restrictToLoggedinUserOnly} = require("./middlewares/auth");
+
+const app = express();
+
 async function main(){
     await mongoose.connect('mongodb://127.0.0.1:27017/AuthDB');
     console.log("Connected to MongoDB");
@@ -16,12 +16,15 @@ async function main(){
 
 main().catch(err=>console.log(err));
 
+app.use(cookieParser());
+app.use(staticRoutes);
 app.use(methodOverride('_method'));
 app.use(express.urlencoded({extended:false}));
 app.set('view engine', 'ejs');
 app.set('views',path.join(__dirname,'views'));
 
-app.use('/users', userRoutes);
+app.use('/', userRoutes);
+
 
 app.listen(3000, () => {
     console.log("Server is running on port 3000");
