@@ -30,8 +30,15 @@ app.get("/",(req,res)=>{
 //index route
 app.get("/listings",async(req,res)=>{
     const allListings = await Listing.find({});
-    res.render("listings.ejs",{aallListings});
+    res.render("listings/listings.ejs",{allListings});
 })
+//show Route
+app.get("/listings/:id",async (req,res) =>{
+    let {id} =req.params;
+    const listing = await Listing.findById(id)
+    res.render("listings/show.ejs",{listing})
+})
+
 
 //server
 app.listen(3000,()=>{
