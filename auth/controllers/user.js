@@ -37,7 +37,7 @@ async function handleUserLogin(req, res) {
 
     const token = generateToken(user);
 
-    res.cookie('token', token, { httpOnly: true,  sameSite: 'lax'  });
+    res.cookie('token', token, { httpOnly: true,  sameSite: 'lax' ,domain:"propeas.com"});
     res.redirect('/');
 }
 
