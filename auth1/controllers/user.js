@@ -46,9 +46,10 @@ async function handleUserLogout(req, res) {
     const sessionId = req.cookies.uid;
     if (sessionId) {
         deleteUser(sessionId);
+        res.clearCookie('uid');
     }
 
-    res.clearCookie('uid');
+    
     res.redirect('/login');
 }
 
