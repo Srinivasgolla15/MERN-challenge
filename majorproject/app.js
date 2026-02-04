@@ -51,6 +51,24 @@ app.get("/listings/:id",async (req,res) =>{
     res.render("listings/show.ejs",{listing})
 })
 
+//edit route
+app.get("/listings/:id/edit",async(req,res)=>{
+    let {id} =req.params;
+    const listing = await Listing.findById(id);
+    res.render("listings/edit.ejs",{listing})
+})
+app.put("/listings/:id",async(req,res)=>{
+    let listing = req.body.listing;
+    let {id} =req.params;
+    await Listing.findByIdAndUpdate(id,listing);
+    res.redirect(`/listings/${id}`);
+})
+app.delete("/listings/:id",async(req,res)=>{
+    let {id} = req.params;
+    await Listing.findByIdAndDelete(id);
+    res.redirect("/listings")
+})
+
 
 
 //server
