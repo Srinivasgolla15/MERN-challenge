@@ -40,6 +40,22 @@ userSchema.pre("save", async function () {
     this.password = hashedPassword;
 });
 
+userSchema.static("matchPassword", async function (email, password) {
+    const user = await this.findOne({ email });
+    if (!user) throw new Error("User not found");
+
+    const userProvidedHash = createHmac("sha256", user.salt)
+        .update(password)
+        .digest("hex");
+
+    if (user.password !== userProvidedHash) {
+        throw new Error("Invalid password");
+    }
+
+    return user;
+});
+
+
 
 
 const User = mongoose.model('user', userSchema);
