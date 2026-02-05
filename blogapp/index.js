@@ -5,6 +5,8 @@ const mongoose = require("mongoose");
 const cookieParser = require("cookie-parser");
 const { checkForAuthenticationCookie } = require("./middlewares/auth");
 const userRoute = require("./routes/user");
+const blogRoute = require("./routes/blog");
+const Blog = require("./models/blog");
 
 const app = express();
 
@@ -21,14 +23,19 @@ app.use(checkForAuthenticationCookie("token"));
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
+app.use(express.static("public"));
 
-app.get("/", (req, res) => {
+
+app.get("/", async(req, res) => {
+    const allBlogs = await (await Blog.find({})) ;
     res.render("home", {
         user: req.user,
+        blogs:allBlogs,
     });
 });
 
 app.use("/user", userRoute);
+app.use("/blog",blogRoute)
 
 const PORT = 8000;
 app.listen(PORT, () => {
