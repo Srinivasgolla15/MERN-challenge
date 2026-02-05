@@ -16,10 +16,10 @@ router.post("/signin", async (req,res) => {
         const token = await User.matchPasswordAndGenerateToken(email,password);
 
     console.log("token",token);
-    return res.cookie("token",token).redirect("/");
-    }catch(err){
+    return res.cookie("token",token,{httpOnly : true}).redirect("/");
+    }catch(error){
         return res.render("signin",{
-            err: "incorrect email or password"
+            error: "incorrect email or password"
         });
     }
     
@@ -33,6 +33,10 @@ router.post("/signup",async (req,res)=>{
         password,
     })
     return res.redirect("/");
+})
+
+router.get("/logout",(req,res)=>{
+    res.clearCookie("token").redirect("/")
 })
 
 module.exports = router;
