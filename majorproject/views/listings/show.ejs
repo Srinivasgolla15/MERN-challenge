@@ -1,18 +1,48 @@
- <%layout("/layouts/boilerplate")%>
-<body>
-    <h3>Listing Details</h3>
-    <ul>
-        <li><%=listing.title%></li>
-        <li><%=listing.description%></li>
-        <li>&#8377;<%=listing.price.toLocaleString("en-IN")%></li>
-        <li><%=listing.location%></li>
-        <li><%=listing.country%></li>
-    </ul>
-    <form method="GET" action="/listings/<%=listing._id%>/edit">
-        <button>Edit</button>
-    </form> <br>
-    <form method="POST" action="/listings/<%=listing._id%>?_method=DELETE">
-        <button>Delete</button>
-    </form>
-</body>
- 
+<% layout("/layouts/boilerplate") %>
+
+<div class="container mt-4">
+  <div class="row justify-content-center">
+    <div class="col-8">
+
+      <h3 class="mb-3">Listing Details</h3>
+
+      <div class="card shadow">
+        <img 
+          src="<%= listing.image.url %>" 
+          class="card-img-top" 
+          style="height: 25rem; object-fit: cover;" 
+          alt="listing image"
+        >
+         
+             <div class="card-body p-4">
+          <h5 class="card-title"><%= listing.title %></h5>
+
+          <p class="card-text">
+            <%= listing.description %>
+          </p>
+
+          <p class="text-muted mb-1">
+            <%= listing.location %>, <%= listing.country %>
+          </p>
+
+          <p class="fw-bold fs-5">
+            ₹ <%= listing.price.toLocaleString("en-IN") %>
+          </p>
+       
+        </div>
+       
+      </div>
+
+      <div class="d-flex gap-3 mt-3 mb-3">
+        <form method="GET" action="/listings/<%= listing._id %>/edit">
+          <button class="btn btn-danger">Edit</button>
+        </form>
+
+        <form method="POST" action="/listings/<%= listing._id %>?_method=DELETE">
+          <button class="btn btn-dark">Delete</button>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</div>
