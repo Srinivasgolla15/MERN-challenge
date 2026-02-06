@@ -4,6 +4,7 @@ const multer = require("multer");
 const path = require("path");
 const fs = require("fs");
 const Blog = require("../models/blog");
+const Comment = require("../models/comment");
 
 router.get("/add-new", (req, res) => {
   res.render("addBlog", { user: req.user });
@@ -29,9 +30,11 @@ const upload = multer({ storage });
 
 router.get("/:id", async (req,res)=>{
   const blog = await Blog.findById(req.params.id).populate("createdBy");
+  const comments = await Comment.find({blogId : req.params.id}).populate("createdBy");
   return res.render("blog",{
     user:req.user,
     blog,
+    comments,
   });
 })
 
@@ -50,6 +53,15 @@ router.delete("/:id", async (req, res) => {
   res.redirect("/");
 });
 
+router.post('/comment/:blogId',async(req,res)=>{
+   if (!req.user) return res.redirect("/user/signin");
+  await Comment.create({
+    content : req.body.content,
+    blogId: req.params.blogId,
+    createdBy:req.user._id,
+  });
+  return res.redirect(`/blog/${req.params.blogId}`);
+})
 
 router.post("/", upload.single("coverImage"), async (req, res) => {
   if (!req.user) return res.redirect("/user/signin");
