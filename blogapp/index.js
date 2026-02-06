@@ -26,13 +26,23 @@ app.set("views", path.join(__dirname, "views"));
 app.use(express.static("public"));
 
 
-app.get("/", async(req, res) => {
-    const allBlogs = await (await Blog.find({})) ;
+app.get("/", async (req, res) => {
+    if (!req.user) {
+        return res.render("home", {
+            user: null,
+            blogs: [],
+            error: "Please sign in to see blogs",
+        });
+    }
+
+    const allBlogs = await Blog.find({});
     res.render("home", {
         user: req.user,
-        blogs:allBlogs,
+        blogs: allBlogs,
+        error: null,
     });
 });
+
 
 app.use("/user", userRoute);
 app.use("/blog",blogRoute)
