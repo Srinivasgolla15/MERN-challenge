@@ -27,6 +27,30 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage });
 
+router.get("/:id", async (req,res)=>{
+  const blog = await Blog.findById(req.params.id);
+  return res.render("blog",{
+    user:req.user,
+    blog,
+  });
+})
+
+router.delete("/:id", async (req, res) => {
+  if (!req.user) return res.redirect("/user/signin");
+
+  const blog = await Blog.findById(req.params.id);
+
+  if (!blog) return res.redirect("/");
+
+  if (blog.createdBy.toString() !== req.user._id.toString()) {
+    return res.status(403).send("Unauthorized");
+  }
+
+  await Blog.findByIdAndDelete(req.params.id);
+  res.redirect("/");
+});
+
+
 router.post("/", upload.single("coverImage"), async (req, res) => {
   if (!req.user) return res.redirect("/user/signin");
 
