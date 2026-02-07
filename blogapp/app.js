@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require("express");
 const path = require("path");
 const methodOverride = require("method-override");
@@ -8,11 +9,12 @@ const userRoute = require("./routes/user");
 const blogRoute = require("./routes/blog");
 const Blog = require("./models/blog");
 
+
 const app = express();
 
 main().catch(err => { console.log(err); });
 async function main() {
-    await mongoose.connect("mongodb://127.0.0.1:27017/BlogDB");
+    await mongoose.connect("process.env.MONGO_URL");
     console.log("Connected to MongoDB");
 }
 
@@ -48,7 +50,7 @@ app.get("/", async (req, res) => {
 app.use("/user", userRoute);
 app.use("/blog",blogRoute)
 
-const PORT = 8000;
+const PORT = process.env.PORT  ;
 app.listen(PORT, () => {
     console.log(`server is running on ${PORT}`);
 });
