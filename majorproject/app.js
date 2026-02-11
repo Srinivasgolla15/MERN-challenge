@@ -2,80 +2,87 @@ const express = require("express");
 const mongoose = require("mongoose");
 const path = require("path");
 const methodOverride = require("method-override");
-const {Listing} = require("./models/listing");
+const { Listing } = require("./models/listing");
 const ejsMate = require("ejs-mate");
+const wrapAsync = require("./utils/wrapAsync");
 
 
 
 const app = express();
 
 //DB COnnection
-async function main(){
+async function main() {
     await mongoose.connect('mongodb://127.0.0.1:27017/WanderLust')
-    console.log ( " connected to db")
+    console.log(" connected to db")
 }
 main().catch(err => console.log(err));
 
 //middlewares
-app.use(express.urlencoded({ extended: true }));        
+app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
 
 //views engine
-app.engine("ejs",ejsMate);
+app.engine("ejs", ejsMate);
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
-app.use(express.static(path.join(__dirname,"public")));
+app.use(express.static(path.join(__dirname, "public")));
 
 
 //routes
-app.get("/",(req,res)=>{
+app.get("/", (req, res) => {
     res.send("welcome")
 })
 //index route
-app.get("/listings",async(req,res)=>{
+app.get("/listings", async (req, res) => {
     const allListings = await Listing.find({});
-    res.render("listings/listings.ejs",{allListings});
+    res.render("listings/listings.ejs", { allListings });
 })
 //new listing
-app.get("/listings/new",(req,res)=>{
+app.get("/listings/new", (req, res) => {
     res.render("listings/new")
 })
 //post create route
-app.post("/listings",async(req,res)=>{
-    let listing = req.body.listing;
-    await Listing.create(listing);
-    res.redirect("/listings");
+app.post("/listings",
+    wrapAsync(async (req, res) => {
+        let listing = req.body.listing;
+        await Listing.create(listing);
+        res.redirect("/listings");
 
 
-})
+    })
+);
 //show Route
-app.get("/listings/:id",async (req,res) =>{
-    let {id} =req.params;
+app.get("/listings/:id", async (req, res) => {
+    let { id } = req.params;
     const listing = await Listing.findById(id)
-    res.render("listings/show.ejs",{listing})
+    res.render("listings/show.ejs", { listing })
 })
 
 //edit route
-app.get("/listings/:id/edit",async(req,res)=>{
-    let {id} =req.params;
+app.get("/listings/:id/edit", async (req, res) => {
+    let { id } = req.params;
     const listing = await Listing.findById(id);
-    res.render("listings/edit.ejs",{listing})
+    res.render("listings/edit.ejs", { listing })
 })
-app.put("/listings/:id",async(req,res)=>{
+app.put("/listings/:id", async (req, res) => {
     let listing = req.body.listing;
-    let {id} =req.params;
-    await Listing.findByIdAndUpdate(id,listing);
+    let { id } = req.params;
+    await Listing.findByIdAndUpdate(id, listing);
     res.redirect(`/listings/${id}`);
 })
-app.delete("/listings/:id",async(req,res)=>{
-    let {id} = req.params;
+app.delete("/listings/:id", async (req, res) => {
+    let { id } = req.params;
     await Listing.findByIdAndDelete(id);
     res.redirect("/listings")
 })
 
 
+app.use((err, req, res, next) => {
+    res.send("something went wrong");
+})
+
 
 //server
-app.listen(3000,()=>{
+app.listen(3000, () => {
     console.log("server is running at port 3000");
 })
