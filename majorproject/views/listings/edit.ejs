@@ -1,51 +1,75 @@
- <%layout("/layouts/boilerplate")%>
-<body>
-   <div class="row">
+<%layout(" /layouts/boilerplate")%>
+
+    <body>
+        <div class="row">
             <div class="col-8 offset-2">
                 <h3>Edit This Listing</h3>
-                <form method="POST" action="/listings/<%=listing._id%>?_method=PUT">
+                <form method="POST" action="/listings/<%=listing._id%>?_method=PUT" novalidate class="needs-validation">
                     <div class="mt-3">
                         <label for="title" class="form-label">Title</label>
-                        <input name="listing[title]" placeholder="enter title" type="text" class="form-control" value="<%=listing.title%>">
+                        <input name="listing[title]" placeholder="enter title" type="text" class="form-control"
+                            value="<%=listing.title%>" required>
+                        <div class="invalid-feedback">
+                            Please Enter the Title.
+                        </div>
                     </div>
                     <div class="mt-3">
                         <label for="description" class="form-label">Description</label>
-                        <textarea name="listing[description]" placeholder="enter description"
-                            class="form-control"><%=listing.description%></textarea>
+                        <textarea name="listing[description]" placeholder="enter description" class="form-control"
+                            required><%=listing.description%></textarea>
+                        <div class="invalid-feedback">
+                            Please Enter the Description.
+                        </div>
                     </div>
 
                     <div class="mt-3">
                         <label for="image" class="form-label">Image</label>
-                        <input name="listing[image][url]" placeholder="enter url/link" type="text" class="form-control" value="<%=listing.image.url%>" >
+                        <input name="listing[image][url]" placeholder="enter url/link" type="text" class="form-control"
+                            value="<%=listing.image.url%>" required>
+                        <div class="invalid-feedback">
+                            Please paste the image url.
+                        </div>
                     </div>
 
                     <div class="row ">
                         <div class="mt-3 col-4">
                             <label for="price" class="form-label">Price</label>
-                            <input name="listing[price]" placeholder="enter price" type="number" class="form-control" value="<%=listing.price %>">
+                            <input name="listing[price]" placeholder="enter price" type="number" class="form-control"
+                                value="<%=listing.price %>" required>
+                            <div class="invalid-feedback">
+                                Please enter a valid Price.
+                            </div>
                         </div>
                         <div class="mt-3 col-8">
                             <label for="country" class="form-label">Country</label>
-                            <input name="listing[country]" placeholder="enter Country" type="text" class="form-control" value="<%=listing.country%>">
+                            <input name="listing[country]" placeholder="enter Country" type="text" class="form-control"
+                                value="<%=listing.country%>" required>
+                            <div class="invalid-feedback">
+                                Please enter your Country.
+                            </div>
                         </div>
                     </div>
 
 
                     <div class="mt-3">
                         <label for="location" class="form-label">Location</label>
-                        <input name="listing[location]" placeholder="enter Location" type="text" class="form-control" value="<%=listing.location%>">
+                        <input name="listing[location]" placeholder="enter Location" type="text" class="form-control"
+                            value="<%=listing.location%>" required>
+                        <div class="invalid-feedback">
+                            Please choose the location.
+                        </div>
                     </div>
 
                     <br>
 
                     <div class="d-flex gap-3 mt-3 mb-3">
-                        
+
                         <button class="btn btn-danger">Edit</button>
                         <button type="button" class="btn btn-primary" onclick="history.back()">Back</button>
 
                     </div>
-                   
+
                 </form>
             </div>
         </div>
-</body>
+    </body>

@@ -1,53 +1,76 @@
 <%layout("/layouts/boilerplate")%>
 
     <body>
-        <br> 
+        <br>
         <div class="row">
             <div class="col-8 offset-2">
                 <h3>Create A New Listing</h3>
-                <form method="POST" action="/listings">
+                <form method="POST" action="/listings" novalidate class="needs-validation">
                     <div class="mt-3">
                         <label for="title" class="form-label">Title</label>
-                        <input name="listing[title]" placeholder="enter title" type="text" class="form-control">
+                        <input name="listing[title]" placeholder="enter title" type="text" class="form-control"
+                            required>
+                        <div class="invalid-feedback">
+                            Please Enter the Title.
+                        </div>
                     </div>
                     <div class="mt-3">
-                        <label for="description" class="form-label">Description</label>
-                        <textarea name="listing[description]" placeholder="enter description"
-                            class="form-control"></textarea>
+                        <label for="description" class="form-label" required>Description</label>
+                        <textarea name="listing[description]" placeholder="enter description" class="form-control"
+                            required></textarea>
+                        <div class="invalid-feedback">
+                            Please Enter the Description.
+                        </div>
                     </div>
 
                     <div class="mt-3">
                         <label for="image" class="form-label">Image</label>
-                        <input name="listing[image][url]" placeholder="enter url/link" type="text" class="form-control">
+                        <input name="listing[image][url]" placeholder="enter url/link" type="text" class="form-control"
+                            required>
+                        <div class="invalid-feedback">
+                            Please paste the image url.
+                        </div>
                     </div>
 
                     <div class="row ">
                         <div class="mt-3 col-4">
-                            <label for="price" class="form-label">Price</label>
-                            <input name="listing[price]" placeholder="enter price" type="number" class="form-control">
+                            <label for="price" class="form-label" required>Price</label>
+                            <input name="listing[price]" required placeholder="enter price" type="number"
+                                class="form-control">
+                            <div class="invalid-feedback">
+                                Please enter a valid Price.
+                            </div>
                         </div>
                         <div class="mt-3 col-8">
                             <label for="country" class="form-label">Country</label>
-                            <input name="listing[country]" placeholder="enter Country" type="text" class="form-control">
+                            <input name="listing[country]" required placeholder="enter Country" type="text"
+                                class="form-control">
+                            <div class="invalid-feedback">
+                                Please enter your Country.
+                            </div>
                         </div>
                     </div>
 
 
                     <div class="mt-3">
                         <label for="location" class="form-label">Location</label>
-                        <input name="listing[Location]" placeholder="enter Location" type="text" class="form-control">
+                        <input name="listing[location]" required placeholder="enter Location" type="text"
+                            class="form-control">
+                        <div class="invalid-feedback">
+                            Please choose the location.
+                        </div>
                     </div>
 
                     <br>
                     <div class="d-flex gap-3 mt-3 mb-3">
-                        
+
                         <button class="btn btn-danger">Add</button>
                         <button type="button" class="btn btn-primary" onclick="history.back()">Back</button>
 
                     </div>
-                    
+
                 </form>
             </div>
         </div>
-        
+
     </body>
