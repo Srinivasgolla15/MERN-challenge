@@ -6,7 +6,7 @@ const { Listing } = require("./models/listing");
 const ejsMate = require("ejs-mate");
 const wrapAsync = require("./utils/wrapAsync");
 const ExpressError = require("./utils/ExpressError");
-
+const {ListingSchema} = require("./schema");
 
 
 const app = express();
@@ -33,6 +33,18 @@ app.use(express.static(path.join(__dirname, "public")));
 app.get("/", (req, res) => {
     res.send("welcome")
 })
+
+const validateListing = (req,res,next) =>{
+    let {error} = ListingSchema.validate(req.body);
+        // if (!req.body.listing){
+        //     throw new ExpressError(400,"Send Valid data or listing")
+        // }
+        if (error){
+            throw new ExpressError(400,result.error);
+        }else{
+            next();
+        }
+}
 //index route
 app.get("/listings", wrapAsync(async (req, res) => {
     const allListings = await Listing.find({});
@@ -43,11 +55,9 @@ app.get("/listings/new", (req, res) => {
     res.render("listings/new")
 })
 //post create route
-app.post("/listings",
+app.post("/listings",validateListing,
     wrapAsync(async (req, res) => {
-        if (!req.body.listing){
-            throw new ExpressError(400,"Send Valid data or listing")
-        }
+        
         let listing = req.body.listing;
         await Listing.create(listing);
         res.redirect("/listings");
@@ -68,7 +78,7 @@ app.get("/listings/:id/edit", wrapAsync(async (req, res) => {
     const listing = await Listing.findById(id);
     res.render("listings/edit.ejs", { listing })
 }));
-app.put("/listings/:id", wrapAsync(async (req, res) => {
+app.put("/listings/:id",validateListing, wrapAsync(async (req, res) => {
     if (!req.body.listing){
             throw new ExpressError(400,"Send Valid data or listing")
         }
