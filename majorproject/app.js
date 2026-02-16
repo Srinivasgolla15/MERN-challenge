@@ -7,6 +7,10 @@ const ejsMate = require("ejs-mate");
 const wrapAsync = require("./utils/wrapAsync");
 const ExpressError = require("./utils/ExpressError");
 const {ListingSchema} = require("./schema");
+const Review = require("./models/reviews");
+const flash = require("connect-flash");
+const session = require("express-session");
+
 
 
 const app = express();
@@ -21,13 +25,25 @@ main().catch(err => console.log(err));
 //middlewares
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
+app.use(session({
+    secret: "mysupersecret",
+    resave: false,
+    saveUninitialized: true
+}));
+ 
 
 //views engine
 app.engine("ejs", ejsMate);
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 app.use(express.static(path.join(__dirname, "public")));
-
+app.use(flash());
+//flash
+app.use((req, res, next) => {
+    res.locals.success = req.flash("success");
+    res.locals.error = req.flash("error");
+    next();
+});
 
 //routes
 app.get("/", (req, res) => {
@@ -94,6 +110,20 @@ app.delete("/listings/:id",wrapAsync( async (req, res) => {
     res.redirect("/listings")
 }));
 
+//reviews
+app.post("/listings/:id/reviews",async(req,res)=>{
+    let listing = await Listing.findById(req.params.id);
+    let newReview = new Review(req.body.review);
+
+    listing.reviews.push(newReview._id);
+
+    await newReview.save();
+    await listing.save();
+    req.flash("success", "Review added successfully!");
+    
+    res.redirect(`/listings/${listing._id}`);
+})
+
 
 app.use((req, res, next) => {
     next(new ExpressError(404, "Page Not Found"));
@@ -104,6 +134,9 @@ app.use((err, req, res, next) => {
     let {statusCode = 500,message= "something went wrong"} = err;
     res.status(statusCode).render( "error.ejs",{message});
 })
+
+
+
 
 
 //server
