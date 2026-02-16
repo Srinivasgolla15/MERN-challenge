@@ -6,7 +6,7 @@ const { Listing } = require("./models/listing");
 const ejsMate = require("ejs-mate");
 const wrapAsync = require("./utils/wrapAsync");
 const ExpressError = require("./utils/ExpressError");
-const {ListingSchema} = require("./schema");
+const {listingSchema,reviewSchema} = require("./schema");
 const Review = require("./models/reviews");
 const flash = require("connect-flash");
 const session = require("express-session");
@@ -51,7 +51,20 @@ app.get("/", (req, res) => {
 })
 
 const validateListing = (req,res,next) =>{
-    let {error} = ListingSchema.validate(req.body);
+    let {error} = listingSchema.validate(req.body);
+        // if (!req.body.listing){
+        //     throw new ExpressError(400,"Send Valid data or listing")
+        // }
+        if (error){
+            let errMsg = error.details.map((el)=> el.message).join(",");
+            throw new ExpressError(400,errMsg);
+        }else{
+            next();
+        }
+}
+
+const validateReviews = (req,res,next) =>{
+    let {error} = reviewSchema.validate(req.body);
         // if (!req.body.listing){
         //     throw new ExpressError(400,"Send Valid data or listing")
         // }
@@ -111,7 +124,7 @@ app.delete("/listings/:id",wrapAsync( async (req, res) => {
 }));
 
 //reviews
-app.post("/listings/:id/reviews",async(req,res)=>{
+app.post("/listings/:id/reviews",validateReviews,wrapAsync(async(req,res)=>{
     let listing = await Listing.findById(req.params.id);
     let newReview = new Review(req.body.review);
 
@@ -122,7 +135,7 @@ app.post("/listings/:id/reviews",async(req,res)=>{
     req.flash("success", "Review added successfully!");
     
     res.redirect(`/listings/${listing._id}`);
-})
+}));
 
 
 app.use((req, res, next) => {
