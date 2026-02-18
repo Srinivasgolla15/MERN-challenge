@@ -11,6 +11,7 @@ const Review = require("./models/reviews");
 const flash = require("connect-flash");
 const session = require("express-session");
 const listingRoute = require("./routes/listings");
+const reviewsRoute =require("./routes/reviews");
 
 
 
@@ -52,6 +53,7 @@ app.get("/", (req, res) => {
 })
 
 app.use("/listings",listingRoute);
+app.use("/listings/:id/reviews",reviewsRoute);
 
 
 const validateReviews = (req,res,next) =>{
@@ -68,27 +70,7 @@ const validateReviews = (req,res,next) =>{
 }
 //index route
 //reviews
-app.post("/listings/:id/reviews",validateReviews,wrapAsync(async(req,res)=>{
-    let listing = await Listing.findById(req.params.id);
-    let newReview = new Review(req.body.review);
 
-    listing.reviews.push(newReview._id);
-
-    await newReview.save();
-    await listing.save();
-    req.flash("success", "Review added successfully!");
-    
-    res.redirect(`/listings/${listing._id}`);
-}));
-
-app.delete("/listings/:id/reviews/:reviewid",wrapAsync(async(req,res)=>{
-    let {id,reviewid} = req.params;
-    await Listing.findByIdAndUpdate(id,{$pull:{reviews:reviewid}})
-    await Review.findByIdAndDelete(reviewid);
-    req.flash("error", "Review deleted successfully!");
-    res.redirect(`/listings/${id}`)
-
-}))
 
 
 app.use((req, res, next) => {
