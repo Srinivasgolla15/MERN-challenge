@@ -1,7 +1,7 @@
 const { v4: uuidv4 } = require('uuid');
 const bcrypt = require('bcrypt');
 const User = require('../models/user');
-const { generateToken,verifyToken } = require('../service/auth');
+const { generateToken, verifyToken } = require('../service/auth');
 
 async function handleUserSignup(req, res) {
     const { name, email, password } = req.body;
@@ -37,7 +37,11 @@ async function handleUserLogin(req, res) {
 
     const token = generateToken(user);
 
-    res.cookie('token', token, { httpOnly: true,  sameSite: 'lax' ,domain:"propeas.com"});
+    res.cookie('token', token, { httpOnly: true, sameSite: 'lax' });
+    console.log("LOGIN USER:", user);
+
+    console.log("GENERATED TOKEN:", token);
+
     res.redirect('/');
 }
 
