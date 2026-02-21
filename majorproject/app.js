@@ -2,16 +2,13 @@ const express = require("express");
 const mongoose = require("mongoose");
 const path = require("path");
 const methodOverride = require("method-override");
-const { Listing } = require("./models/listing");
 const ejsMate = require("ejs-mate");
-const wrapAsync = require("./utils/wrapAsync");
-const ExpressError = require("./utils/ExpressError");
-const {listingSchema,reviewSchema} = require("./schema");
-const Review = require("./models/reviews");
+const ExpressError = require("./utils/ExpressError"); 
 const flash = require("connect-flash");
 const session = require("express-session");
 const listingRoute = require("./routes/listings");
 const reviewsRoute =require("./routes/reviews");
+
 
 
 
@@ -30,7 +27,12 @@ app.use(methodOverride('_method'));
 app.use(session({
     secret: "mysupersecret",
     resave: false,
-    saveUninitialized: true
+    saveUninitialized: true,
+    cookie:{
+        httpOnly: true,
+        expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
+        maxAge: 1000 * 60 * 60 * 24 * 7
+    }
 }));
  
 
@@ -55,22 +57,7 @@ app.get("/", (req, res) => {
 app.use("/listings",listingRoute);
 app.use("/listings/:id/reviews",reviewsRoute);
 
-
-const validateReviews = (req,res,next) =>{
-    let {error} = reviewSchema.validate(req.body);
-        // if (!req.body.listing){
-        //     throw new ExpressError(400,"Send Valid data or listing")
-        // }
-        if (error){
-            let errMsg = error.details.map((el)=> el.message).join(",");
-            throw new ExpressError(400,errMsg);
-        }else{
-            next();
-        }
-}
-//index route
-//reviews
-
+ 
 
 
 app.use((req, res, next) => {
