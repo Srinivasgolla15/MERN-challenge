@@ -81,3 +81,10 @@
     opacity:0.4;
     background-color: azure;
 }
+
+
+footer {
+    background-color: #ebebeb; /* or whatever color you want */
+    padding: 1.5rem 0;
+    text-align: center;
+}

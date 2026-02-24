@@ -4,6 +4,7 @@ const wrapAsync = require("../utils/wrapAsync");
 const {listingSchema,reviewSchema} = require("../schema");
 const ExpressError = require("../utils/ExpressError");
 const { Listing } = require("../models/listing");
+const {isLoggedIn} = require("../middlewares/auth");
 
 
 const validateListing = (req,res,next) =>{
@@ -19,16 +20,17 @@ const validateListing = (req,res,next) =>{
         }
 }
 
-router.get("/", wrapAsync(async (req, res) => {
+router.get("/",isLoggedIn, wrapAsync(async (req, res) => {
+    
     const allListings = await Listing.find({});
     res.render("listings/listings.ejs", { allListings });
 }));
 //new listing
-router.get("/new", (req, res) => {
+router.get("/new",isLoggedIn, (req, res) => {
     res.render("listings/new")
 })
 //post create route
- router.post("/",validateListing,
+ router.post("/",isLoggedIn,validateListing,
     wrapAsync(async (req, res) => {
         
         let listing = req.body.listing;
@@ -51,12 +53,12 @@ router.get("/new", (req, res) => {
 }));
 
 //edit route
-router.get("/:id/edit", wrapAsync(async (req, res) => {
+router.get("/:id/edit",isLoggedIn, wrapAsync(async (req, res) => {
     let { id } = req.params;
     const listing = await Listing.findById(id);
     res.render("listings/edit.ejs", { listing })
 }));
-router.put("/:id",validateListing, wrapAsync(async (req, res) => {
+router.put("/:id",isLoggedIn,validateListing, wrapAsync(async (req, res) => {
     if (!req.body.listing){
             throw new ExpressError(400,"Send Valid data or listing")
         }
@@ -65,7 +67,7 @@ router.put("/:id",validateListing, wrapAsync(async (req, res) => {
     await Listing.findByIdAndUpdate(id, listing);
     res.redirect(`/listings/${id}`);
 }));
-router.delete("/:id",wrapAsync( async (req, res) => {
+router.delete("/:id",isLoggedIn,wrapAsync( async (req, res) => {
     let { id } = req.params;
     await Listing.findByIdAndDelete(id);
     req.flash("error","Listing Deleted");

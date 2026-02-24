@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WanderLust</title>
+    <title>WayPoint</title>
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -19,7 +19,7 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
-<body>
+<body class="d-flex flex-column min-vh-100">
 
     <!-- Navbar -->
     <%- include("../partials/navbar.ejs") %>
@@ -28,7 +28,11 @@
     <%- include("../partials/flash.ejs") %>
 
     <!-- Main Content -->
-    <div class="container mt-4"><%- body %></div>
+    <main class="flex-fill">
+        <div class="container mt-4">
+            <%- body %>
+        </div>
+    </main>
 
     <!-- Footer -->
     <%- include("../partials/footer.ejs") %>

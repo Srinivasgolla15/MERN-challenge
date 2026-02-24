@@ -8,6 +8,7 @@ const flash = require("connect-flash");
 const session = require("express-session");
 const listingRoute = require("./routes/listings");
 const reviewsRoute =require("./routes/reviews");
+const userRoute = require("./routes/user");
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const User = require("./models/user");
@@ -66,6 +67,7 @@ app.get("/", (req, res) => {
 
 app.use("/listings",listingRoute);
 app.use("/listings/:id/reviews",reviewsRoute);
+app.use("/",userRoute);
 
  
 
