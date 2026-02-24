@@ -11,4 +11,9 @@ const userSchema = new Schema({
         default:Date.now()
     }
 });
-userSchema.plugin(passportLocalMongoose);
+
+userSchema.plugin(
+    passportLocalMongoose.default || passportLocalMongoose
+);
+
+module.exports = mongoose.model("User", userSchema);

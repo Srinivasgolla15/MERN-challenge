@@ -8,7 +8,9 @@ const flash = require("connect-flash");
 const session = require("express-session");
 const listingRoute = require("./routes/listings");
 const reviewsRoute =require("./routes/reviews");
-
+const passport = require("passport");
+const LocalStrategy = require("passport-local");
+const User = require("./models/user");
 
 
 
@@ -34,7 +36,13 @@ app.use(session({
         maxAge: 1000 * 60 * 60 * 24 * 7
     }
 }));
- 
+
+//before using passport we need to initialize it and also use session
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser()); 
 
 //views engine
 app.engine("ejs", ejsMate);
@@ -53,6 +61,8 @@ app.use((req, res, next) => {
 app.get("/", (req, res) => {
     res.send("welcome")
 })
+
+ 
 
 app.use("/listings",listingRoute);
 app.use("/listings/:id/reviews",reviewsRoute);
