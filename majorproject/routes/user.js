@@ -15,8 +15,15 @@ router.post("/signup", wrapAsync(async (req, res) => {
         const user = new User({ username, email });
         const registeredUser = await User.register(user, password);
 
-        req.flash("success", "Welcome to WayPoint");
-        res.redirect("/listings");
+        req.login(registeredUser, (err) => {
+            if (err) {
+                return next(err);
+            }
+            req.flash("success", "Welcome to WayPoint");
+            res.redirect("/listings");
+        });
+
+
     } catch (e) {
         req.flash("error", e.message);
         res.redirect("/signup");
