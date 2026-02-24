@@ -20,7 +20,7 @@ const validateListing = (req,res,next) =>{
         }
 }
 
-router.get("/",isLoggedIn, wrapAsync(async (req, res) => {
+router.get("/", wrapAsync(async (req, res) => {
     
     const allListings = await Listing.find({});
     res.render("listings/listings.ejs", { allListings });
