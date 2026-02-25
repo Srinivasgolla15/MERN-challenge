@@ -10,7 +10,16 @@ const server = http.createServer(app);
 const io = new Server(server);
 
 io.on("connection", (socket)=>{
-    console.log("A new user has connected ",socket.io)
+    console.log("A new user has connected ",socket.id);
+    
+    socket.on("chat message", (msg) => {
+        console.log("Message received:", msg);
+        io.emit("chat message", msg);
+    });
+    
+    socket.on('disconnect', () => {
+    console.log('user disconnected',socket.id);
+  });
 })
 
 
@@ -21,6 +30,6 @@ app.get("/",(req,res)=>{
     return res.sendFile("/public/index.html")
 })
 
-app.listen(3000,(req,res)=>{
+server.listen(3000,(req,res)=>{
     console.log("server is running at 3000");
 })
