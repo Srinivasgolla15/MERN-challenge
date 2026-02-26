@@ -31,6 +31,7 @@
         </div>
 
         <!-- Edit/Delete Buttons -->
+         <% if(currentUser && currentUser._id.equals(listing.owner._id)) { %>
         <div class="d-flex gap-3 mb-4">
           <form method="GET" action="/listings/<%= listing._id %>/edit">
             <button class="btn btn-danger">Edit</button>
@@ -39,6 +40,7 @@
             <button class="btn btn-dark">Delete</button>
           </form>
         </div>
+        <% } %>
 
         <!-- Leave a Review Form -->
         <div class="mb-5">

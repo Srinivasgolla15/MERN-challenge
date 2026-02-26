@@ -4,7 +4,7 @@ const wrapAsync = require("../utils/wrapAsync");
 const {listingSchema,reviewSchema} = require("../schema");
 const ExpressError = require("../utils/ExpressError");
 const { Listing } = require("../models/listing");
-const {isLoggedIn} = require("../middlewares/auth");
+const {isLoggedIn , isAuthor} = require("../middlewares/auth");
 
 
 const validateListing = (req,res,next) =>{
@@ -61,7 +61,7 @@ router.get("/:id/edit",isLoggedIn, wrapAsync(async (req, res) => {
     const listing = await Listing.findById(id);
     res.render("listings/edit.ejs", { listing })
 }));
-router.put("/:id",isLoggedIn,validateListing, wrapAsync(async (req, res) => {
+router.put("/:id",isLoggedIn,isAuthor,validateListing, wrapAsync(async (req, res) => {
     if (!req.body.listing){
             throw new ExpressError(400,"Send Valid data or listing")
         }
@@ -70,7 +70,7 @@ router.put("/:id",isLoggedIn,validateListing, wrapAsync(async (req, res) => {
     await Listing.findByIdAndUpdate(id, listing);
     res.redirect(`/listings/${id}`);
 }));
-router.delete("/:id",isLoggedIn,wrapAsync( async (req, res) => {
+router.delete("/:id",isLoggedIn,isAuthor,wrapAsync( async (req, res) => {
     let { id } = req.params;
     await Listing.findByIdAndDelete(id);
     req.flash("error","Listing Deleted");
