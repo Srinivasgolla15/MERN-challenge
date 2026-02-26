@@ -1,3 +1,6 @@
+if  (process.env.NODE_ENV !== "production") {
+require("dotenv").config();
+}
 const express = require("express");
 const mongoose = require("mongoose");
 const path = require("path");
@@ -12,6 +15,8 @@ const userRoute = require("./routes/user");
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const User = require("./models/user");
+const multer = require("multer");
+const upload = multer({ dest: "uploads/" });
 
 
 
