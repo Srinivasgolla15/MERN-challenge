@@ -30,10 +30,11 @@ module.exports.renderNewForm = (req, res) => {
 // CREATE - Add Listing
  
 module.exports.createListing = async (req, res) => {
+  let url = req.file.path;
+  let filename = req.file.filename;
   const listing = req.body.listing;
-
+  listing.image = { url, filename };
   listing.owner = req.user._id;
-
   await Listing.create(listing);
 
   req.flash("success", "New Listing Created");
@@ -87,7 +88,35 @@ module.exports.updateListing = async (req, res) => {
     throw new ExpressError(400, "Send Valid Data");
   }
 
-  await Listing.findByIdAndUpdate(id, req.body.listing);
+  // Find the listing
+  const listing = await Listing.findById(id);
+  if (!listing) {
+    req.flash("error", "Listing Not Found");
+    return res.redirect("/listings");
+  }
+
+  // Update text fields
+  listing.title = req.body.listing.title;
+  listing.description = req.body.listing.description;
+  listing.price = req.body.listing.price;
+  listing.country = req.body.listing.country;
+  listing.location = req.body.listing.location;
+
+  // Update image if new file uploaded
+  if (req.file) {
+    // Delete old Cloudinary image if exists
+    if (listing.image && listing.image.filename) {
+      const cloudinary = require("cloudinary").v2;
+      await cloudinary.uploader.destroy(listing.image.filename);
+    }
+
+    listing.image = {
+      url: req.file.path,
+      filename: req.file.filename
+    };
+  }
+
+  await listing.save();
 
   req.flash("success", "Listing Updated");
   res.redirect(`/listings/${id}`);
@@ -98,6 +127,17 @@ module.exports.updateListing = async (req, res) => {
  
 module.exports.deleteListing = async (req, res) => {
   const { id } = req.params;
+   const listing = await Listing.findById(id);
+
+  if (!listing) {
+    req.flash("error", "Listing Not Found");
+    return res.redirect("/listings");
+  }
+
+  if (listing.image && listing.image.filename) {
+    const cloudinary = require("cloudinary").v2;
+    await cloudinary.uploader.destroy(listing.image.filename);
+  }
 
   await Listing.findByIdAndDelete(id);
 
