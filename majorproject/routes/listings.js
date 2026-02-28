@@ -58,9 +58,10 @@ router.get(
 // UPDATE - Update listing
 router.put(
     "/:id",
-    upload.single("listing[image]"),
+    
     isLoggedIn,
     isAuthor,
+    upload.single("listing[image]"),
     validateListing,
     wrapAsync(listingController.updateListing)
 );

@@ -74,7 +74,7 @@ module.exports.renderEditForm = async (req, res) => {
     req.flash("error", "Listing Not Found");
     return res.redirect("/listings");
   }
-
+  listing.image.url = listing.image.url.replace("/upload", "/upload/w_300");
   res.render("listings/edit.ejs", { listing });
 };
 
@@ -89,18 +89,11 @@ module.exports.updateListing = async (req, res) => {
   }
 
   // Find the listing
-  const listing = await Listing.findById(id);
+  const listing = await Listing.findByIdAndUpdate(id, req.body.listing);
   if (!listing) {
     req.flash("error", "Listing Not Found");
     return res.redirect("/listings");
   }
-
-  // Update text fields
-  listing.title = req.body.listing.title;
-  listing.description = req.body.listing.description;
-  listing.price = req.body.listing.price;
-  listing.country = req.body.listing.country;
-  listing.location = req.body.listing.location;
 
   // Update image if new file uploaded
   if (req.file) {
@@ -114,9 +107,10 @@ module.exports.updateListing = async (req, res) => {
       url: req.file.path,
       filename: req.file.filename
     };
+    await listing.save();
   }
 
-  await listing.save();
+  
 
   req.flash("success", "Listing Updated");
   res.redirect(`/listings/${id}`);
