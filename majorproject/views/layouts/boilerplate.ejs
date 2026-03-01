@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,51 +9,64 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap"
+        rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="/css/style.css"/>
-    <link rel="stylesheet" href="/css/rating.css"/>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/rating.css" />
 
     <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- MapLibre CSS -->
+    <link href="https://unpkg.com/maplibre-gl/dist/maplibre-gl.css" rel="stylesheet" />
 
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
+
 <body class="d-flex flex-column min-vh-100">
 
     <!-- Navbar -->
     <%- include("../partials/navbar.ejs") %>
 
-    <!-- Flash Toasts -->
-    <%- include("../partials/flash.ejs") %>
+        <!-- Flash Toasts -->
+        <%- include("../partials/flash.ejs") %>
 
-    <!-- Main Content -->
-    <main class="flex-fill">
-        <div class="container mt-4">
-            <%- body %>
-        </div>
-    </main>
+            <!-- Main Content -->
+            <main class="flex-fill">
+                <div class="container mt-4">
+                    <%- body %>
+                </div>
+            </main>
 
-    <!-- Footer -->
-    <%- include("../partials/footer.ejs") %>
+            <!-- Footer -->
+            <%- include("../partials/footer.ejs") %>
 
-    <!-- Bootstrap JS Bundle (includes Popper) -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+                <!-- Bootstrap JS Bundle (includes Popper) -->
+                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+                    integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+                    crossorigin="anonymous"></script>
 
-    <!-- Custom JS -->
-    <script src="/js/script.js"></script>
+                <!-- MapLibre JS -->
+                <script src="https://unpkg.com/maplibre-gl/dist/maplibre-gl.js"></script>
 
-    <!-- Initialize Toasts -->
-    <script>
-      // Show all toast messages
-      const toastElList = [].slice.call(document.querySelectorAll('.toast'));
-      toastElList.forEach(function(toastEl) {
-        const toast = new bootstrap.Toast(toastEl, { autohide: true, delay: 2000 }); // auto-hide in 3s
-        toast.show();
-      });
-    </script>
+                <!-- Custom JS -->
+                <script src="/js/script.js"></script>
+                <script src="/js/map.js"></script>
+                <!-- Initialize Toasts -->
+                <script>
+                    // Show all toast messages
+                    const toastElList = [].slice.call(document.querySelectorAll('.toast'));
+                    toastElList.forEach(function (toastEl) {
+                        const toast = new bootstrap.Toast(toastEl, { autohide: true, delay: 2000 }); // auto-hide in 3s
+                        toast.show();
+                    });
+                </script>
 
 </body>
+
 </html>
