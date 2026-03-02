@@ -9,9 +9,10 @@ module.exports.listingSchema = joi.object({
         location: joi.string().required(),
         country: joi.string().required(),
         price: joi.number().required().min(0),
-        image: joi.object({
-            url: joi.string().allow("", null)
-        })
+        // Remove image validation since it's handled by multer
+        // latitude and longitude are optional (from map)
+        latitude: joi.number().optional(),
+        longitude: joi.number().optional()
     }).required(),
 })
 

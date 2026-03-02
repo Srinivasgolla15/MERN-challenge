@@ -1,13 +1,18 @@
-const { Listing } = require("../models/listing");
+const {Listing }= require("../models/listing");
 const ExpressError = require("../utils/ExpressError");
 const { listingSchema } = require("../schema");
+const { geocodeAddress } = require("../utils/geoCode");
 
 module.exports.listingValidator =(req, res, next) => {
   const { error } = listingSchema.validate(req.body);
+  console.log('Request body:', req.body);
+  console.log('Validation error:', error);
 
   if (error) {
     const errMsg = error.details.map(el => el.message).join(",");
-    throw new ExpressError(400, errMsg);
+    console.log('Validation failed:', errMsg);
+    req.flash("error", "Validation failed: " + errMsg);
+    return res.redirect("/listings/new");
   }
 
   next();
@@ -15,8 +20,14 @@ module.exports.listingValidator =(req, res, next) => {
 // INDEX - Show All Listings
  
 module.exports.index = async (req, res) => {
-  const allListings = await Listing.find({});
-  res.render("listings/listings.ejs", { allListings });
+  try {
+    const allListings = await Listing.find({});
+    res.render("listings/listings.ejs", { allListings });
+  } catch (error) {
+    console.error('Error fetching listings:', error);
+    req.flash("error", "Failed to fetch listings: " + error.message);
+    res.redirect("/listings");
+  }
 };
 
  
@@ -30,16 +41,61 @@ module.exports.renderNewForm = (req, res) => {
 // CREATE - Add Listing
  
 module.exports.createListing = async (req, res) => {
-  let url = req.file.path;
-  let filename = req.file.filename;
-  const listing = req.body.listing;
-  listing.image = { url, filename };
-  listing.owner = req.user._id;
-  await Listing.create(listing);
+    try {
+        const listingData = req.body.listing;
 
-  req.flash("success", "New Listing Created");
-  res.redirect("/listings");
+        // Image
+        listingData.image = {
+            url: req.file.path,
+            filename: req.file.filename
+        };
+
+        listingData.owner = req.user._id;
+
+        let geometry;
+
+        // If lat/lng from map
+        if (listingData.latitude && listingData.longitude) {
+            geometry = {
+                type: "Point",
+                coordinates: [
+                    parseFloat(listingData.longitude),
+                    parseFloat(listingData.latitude)
+                ]
+            };
+        } else {
+            // fallback to geocode
+            const address = `${listingData.location}, ${listingData.country}`;
+            const coords = await geocodeAddress(address);
+
+            if (!coords) {
+                req.flash("error", "Unable to determine location.");
+                return res.redirect("/listings/new");
+            }
+
+            geometry = {
+                type: "Point",
+                coordinates: [coords.lng, coords.lat]
+            };
+        }
+
+        listingData.geometry = geometry;
+
+        delete listingData.latitude;
+        delete listingData.longitude;
+
+        await Listing.create(listingData);
+
+        req.flash("success", "Listing Created");
+        res.redirect("/listings");
+
+    } catch (err) {
+        console.error(err);
+        req.flash("error", "Failed to create listing");
+        res.redirect("/listings/new");
+    }
 };
+
 
  
 // SHOW - Show One Listing
