@@ -27,9 +27,10 @@ function initMap() {
     map.addControl(new maplibregl.NavigationControl());
 
     if (isShowPage) {
-        new maplibregl.Marker()
+        new maplibregl.Marker({color: "#ff0000"})
             .setLngLat(listingCoordinates)
-            .addTo(map);
+            .addTo(map)
+            .setPopup(new maplibregl.Popup().setText(listingTitle || "Listing Location"));
         return; // stop here
     }
 
@@ -51,7 +52,7 @@ function initMap() {
 function setMarkerLocation(lng, lat) {
     if (marker) marker.remove();
 
-    marker = new maplibregl.Marker()
+    marker = new maplibregl.Marker({color: "#ff0000"})
         .setLngLat([lng, lat])
         .addTo(map);
 
