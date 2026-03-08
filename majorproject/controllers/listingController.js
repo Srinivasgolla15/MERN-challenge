@@ -20,11 +20,31 @@ module.exports.listingValidator =(req, res, next) => {
 // INDEX - Show All Listings
  
 module.exports.index = async (req, res) => {
+  const { category, search } = req.query;
+
   try {
-    const allListings = await Listing.find({});
+    let query = {};
+
+    // category filter
+    if (category) {
+      query.category = category;
+    }
+
+    // search filter
+    if (search) {
+      query.$or = [
+        { title: { $regex: search, $options: "i" } },
+        { location: { $regex: search, $options: "i" } },
+        { country: { $regex: search, $options: "i" } }
+      ];
+    }
+
+    const allListings = await Listing.find(query);
+
     res.render("listings/listings.ejs", { allListings });
+
   } catch (error) {
-    console.error('Error fetching listings:', error);
+    console.error("Error fetching listings:", error);
     req.flash("error", "Failed to fetch listings: " + error.message);
     res.redirect("/listings");
   }
