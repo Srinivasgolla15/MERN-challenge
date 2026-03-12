@@ -6,6 +6,11 @@ const userSchema = new Schema({
     username:String,
     password:String,
     email:{type:String, required:true},
+    role: {
+    type: String,
+    enum: ['customer', 'host', 'admin'],
+    default: 'customer'  // New users default to customer
+},
     createdAt : {
         type:Date,
         default:Date.now()

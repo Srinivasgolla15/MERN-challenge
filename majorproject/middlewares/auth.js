@@ -28,6 +28,23 @@ module.exports.isAuthor= async (req,res,next) =>{
     next();
 }
 
+module.exports.isAdmin = (req, res, next) => {
+    if (req.user && req.user.role === 'admin') {
+        return next();
+    }
+    req.flash("error", "You don't have permission to access this page");
+    return res.redirect("/listings");
+}
+
+module.exports.isHost = (req, res, next) => {
+    if (req.user && req.user.role === 'host') {
+        return next();
+    }
+    req.flash("error", "You don't have permission to access this page");
+    return res.redirect("/listings");
+}
+
+
 module.exports.isReviewAuthor= async (req,res,next) =>{
     let {  id,reviewid } = req.params;
     const review = await Review.findById(reviewid);
