@@ -11,6 +11,8 @@ function App( ) {
 
   return (
     <>
+      <LudoBoard/>
+      <TodoList/>
       <Lottery/>
 
     </>
