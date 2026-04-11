@@ -5,3 +5,4 @@ I am challenging myself to learn mern stack within 150 days with no holidays
 js revisit 
 docker basics 
 docker basics
+react revision 
