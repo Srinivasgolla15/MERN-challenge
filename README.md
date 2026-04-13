@@ -6,3 +6,4 @@ js revisit
 docker basics 
 docker basics
 react revision 
+skip
