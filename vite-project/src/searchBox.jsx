@@ -2,7 +2,29 @@ import { useState } from "react";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 export default function SearchBox() {
+    const API_URL = "https://api.openweathermap.org/data/2.5/weather";
+    const API_KEY = "64762f58bfc9df7651def64e208e8ec2";
     let [city, setCity] = useState("");
+
+    let fetchWeather = async (city) => {
+        let response = await fetch(`${API_URL}?q=${city}&appid=${API_KEY}&units=metric`);
+        let data = await response.json();
+        console.log(data);
+        let weather = {
+            temp : data.main.temp,
+            description : data.weather[0].description,
+            icon : data.weather[0].icon,
+            humidity: data.main.humidity,
+            tempmax: data.main.temp_max,
+            tempmin: data.main.temp_min ,
+            feelsLike: data.main.feels_like,
+            city: data.name,
+            country: data.sys.country
+        }
+        console.log(weather);
+
+        
+    }
 
     let handleChange = (e)=>{
         setCity(e.target.value);
@@ -11,6 +33,9 @@ export default function SearchBox() {
     let handleSubmit = (e)=>{
         e.preventDefault();
         console.log(city);
+        fetchWeather(city);
+        setCity("");
+        
     }
 
     return (
