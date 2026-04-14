@@ -5,9 +5,19 @@ import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import SearchBox from './searchBox';
+import { useState } from "react";
 
 export default function InfoBox() {
+
+    let [weatherInfo, setWeatherInfo] = useState({});
+
+    let updateWeather = (newInfo) => {
+    setWeatherInfo(newInfo);
+}
+    
     return (
+    <div style={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}>
+        <SearchBox updateWeather={updateWeather} />
         <Card sx={{ maxWidth: 345 }}>
             <CardMedia
                 sx={{ height: 140 }}
@@ -17,21 +27,31 @@ export default function InfoBox() {
 
             <CardContent>
                 {/* ✅ Correct way */}
-                <SearchBox />
-
+                
+                
                 <Typography gutterBottom variant="h5" component="div">
-                    Weather Info
+                    {weatherInfo.city ? `Weather in ${weatherInfo.city}` : "Weather App"}
                 </Typography>
 
                 <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-                    Search for a city to get weather details 🌦️
+                    <div>
+                        {weatherInfo.description ? `Description: ${weatherInfo.description}` : ""}
+                    </div>
+                    <div>
+                        {weatherInfo.temp ? `Temperature: ${weatherInfo.temp}°C` : ""}
+                    </div>
+                    <div>
+                        {weatherInfo.humidity ? `Humidity: ${weatherInfo.humidity}%` : ""}
+                    </div>
+                    {weatherInfo.tempmax && weatherInfo.tempmin ? `Temperature Range: ${weatherInfo.tempmin}°C - ${weatherInfo.tempmax}°C` : ""}
+                    <div>
+                        {weatherInfo.feelsLike ? `Feels Like: ${weatherInfo.feelsLike}°C` : ""}
+                    </div>
+                    {weatherInfo.country ? `Country: ${weatherInfo.country}` : ""}
                 </Typography>
             </CardContent>
 
-            <CardActions>
-                <Button size="small">Share</Button>
-                <Button size="small">Learn More</Button>
-            </CardActions>
         </Card>
+    </div>
     );
 }
