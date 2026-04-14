@@ -40,7 +40,13 @@ export default function SearchBox({updateWeather}) {
     }
 
     return (
-        <div>
+        <div style={{
+            display: "flex",
+            flexDirection: "column", 
+            alignItems: "center",
+            gap: "20px",
+            marginTop: "20px"
+        }}>
             <h3> Search for the Weather</h3>
             <TextField label="City name" variant="outlined" value={city} onChange={handleChange} />
             <Button variant="contained" onClick={handleSubmit}>

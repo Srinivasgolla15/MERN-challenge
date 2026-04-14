@@ -1,8 +1,6 @@
 import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
-import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import SearchBox from './searchBox';
 import { useState } from "react";
@@ -12,46 +10,72 @@ export default function InfoBox() {
     let [weatherInfo, setWeatherInfo] = useState({});
 
     let updateWeather = (newInfo) => {
-    setWeatherInfo(newInfo);
-}
-    
+        setWeatherInfo(newInfo);
+    }
+
     return (
-    <div style={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}>
-        <SearchBox updateWeather={updateWeather} />
-        <Card sx={{ maxWidth: 345 }}>
-            <CardMedia
-                sx={{ height: 140 }}
-                image="https://images.unsplash.com/photo-1502082553048-f009c37129b9"
-                title="weather"
-            />
+        <div style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            gap: "30px",
+            marginTop: "40px"
+        }}>
 
-            <CardContent>
-                {/* ✅ Correct way */}
-                
-                
-                <Typography gutterBottom variant="h5" component="div">
-                    {weatherInfo.city ? `Weather in ${weatherInfo.city}` : "Weather App"}
-                </Typography>
+            {/* 🔍 SearchBox at top */}
+            <SearchBox updateWeather={updateWeather} />
 
-                <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-                    <div>
-                        {weatherInfo.description ? `Description: ${weatherInfo.description}` : ""}
-                    </div>
-                    <div>
-                        {weatherInfo.temp ? `Temperature: ${weatherInfo.temp}°C` : ""}
-                    </div>
-                    <div>
-                        {weatherInfo.humidity ? `Humidity: ${weatherInfo.humidity}%` : ""}
-                    </div>
-                    {weatherInfo.tempmax && weatherInfo.tempmin ? `Temperature Range: ${weatherInfo.tempmin}°C - ${weatherInfo.tempmax}°C` : ""}
-                    <div>
-                        {weatherInfo.feelsLike ? `Feels Like: ${weatherInfo.feelsLike}°C` : ""}
-                    </div>
-                    {weatherInfo.country ? `Country: ${weatherInfo.country}` : ""}
-                </Typography>
-            </CardContent>
+            {/* 🌤 Weather Card */}
+            <Card sx={{ maxWidth: 400, width: "100%", textAlign: "center", boxShadow: 3 }}>
 
-        </Card>
-    </div>
+                <CardMedia
+                    sx={{ height: 180 }}
+                    image="https://images.unsplash.com/photo-1502082553048-f009c37129b9"
+                    title="weather"
+                />
+
+                <CardContent>
+
+                    <Typography variant="h5" gutterBottom>
+                        {weatherInfo.city
+                            ? `Weather in ${weatherInfo.city}`
+                            : "Search a city"}
+                    </Typography>
+
+                    {weatherInfo.description && (
+                        // <Typography>Description: {weatherInfo.description}</Typography>
+                        <Typography variant="h5">
+                            {weatherInfo.description?.includes("rain") && "🌧️"}
+                            {weatherInfo.description?.includes("clear") && "☀️"}
+                            {weatherInfo.description?.includes("cloud") && "☁️"}
+                            {weatherInfo.city &&  weatherInfo.description}
+                            </Typography>
+                    )}
+
+                    {weatherInfo.temp && (
+                        <Typography>Temperature: {weatherInfo.temp}°C</Typography>
+                    )}
+
+                    {weatherInfo.humidity && (
+                        <Typography>Humidity: {weatherInfo.humidity}%</Typography>
+                    )}
+
+                    {weatherInfo.tempmax && weatherInfo.tempmin && (
+                        <Typography>
+                            Range: {weatherInfo.tempmin}°C - {weatherInfo.tempmax}°C
+                        </Typography>
+                    )}
+
+                    {weatherInfo.feelsLike && (
+                        <Typography>Feels Like: {weatherInfo.feelsLike}°C</Typography>
+                    )}
+
+                    {weatherInfo.country && (
+                        <Typography>Country: {weatherInfo.country}</Typography>
+                    )}
+
+                </CardContent>
+            </Card>
+        </div>
     );
 }
