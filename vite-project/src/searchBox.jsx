@@ -1,7 +1,9 @@
 import { useState } from "react";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
+import { useNavigate, Link } from "react-router-dom";
 export default function SearchBox({updateWeather}) {
+    const navigate = useNavigate();
     const API_URL = "https://api.openweathermap.org/data/2.5/weather";
     const API_KEY = "64762f58bfc9df7651def64e208e8ec2";
     let [city, setCity] = useState("");
@@ -23,6 +25,16 @@ export default function SearchBox({updateWeather}) {
         }
         console.log(weather);
         updateWeather(weather);
+
+        await fetch("http://localhost:5000/search", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                city: weather.city,
+                country: weather.country,
+                temperature: weather.temp
+            })
+        });
 
         
     }
@@ -52,6 +64,7 @@ export default function SearchBox({updateWeather}) {
             <Button variant="contained" onClick={handleSubmit}>
                 Search
             </Button>
+            <Link to="/history">History</Link>
         </div>
 
     );
