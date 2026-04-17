@@ -9,7 +9,7 @@ app.use(cors());
 app.use(express.json());
 
 // DB Connection
-mongoose.connect("mongodb://mongoadmin:secret@localhost:27017/weatherDB?authSource=admin")
+mongoose.connect("mongodb://mongoadmin:secret@mongodb:27017/weatherDB?authSource=admin")
   .then(() => console.log("connected to db"))
   .catch((err) => console.error("Error connecting to db:", err));
 
