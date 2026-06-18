@@ -2,6 +2,7 @@ const {Listing }= require("../models/listing");
 const ExpressError = require("../utils/ExpressError");
 const { listingSchema } = require("../schema");
 const { geocodeAddress } = require("../utils/geoCode");
+const buildQuery = require("../utils/buildQuery");
 
 module.exports.listingValidator =(req, res, next) => {
   const { error } = listingSchema.validate(req.body);
@@ -20,28 +21,12 @@ module.exports.listingValidator =(req, res, next) => {
 // INDEX - Show All Listings
  
 module.exports.index = async (req, res) => {
-  const { category, search } = req.query;
-
-  try {
-    let query = {};
-
-    // category filter
-    if (category) {
-      query.category = category;
-    }
-
-    // search filter
-    if (search) {
-      query.$or = [
-        { title: { $regex: search, $options: "i" } },
-        { location: { $regex: search, $options: "i" } },
-        { country: { $regex: search, $options: "i" } }
-      ];
-    }
-
+  try{
+   
+    const query = buildQuery(req.query);
     const allListings = await Listing.find(query);
 
-    res.render("listings/listings.ejs", { allListings });
+    res.render("listings/listings.ejs", { allListings,searchAction: "/listings" });
 
   } catch (error) {
     console.error("Error fetching listings:", error);
@@ -165,7 +150,7 @@ module.exports.updateListing = async (req, res) => {
   }
 
   // Find the listing
-  const listing = await Listing.findByIdAndUpdate(id, req.body.listing);
+  const listing = await Listing.findByIdAndUpdate(id, req.body.listing,{ new: true });
   if (!listing) {
     req.flash("error", "Listing Not Found");
     return res.redirect("/listings");

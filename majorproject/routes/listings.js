@@ -7,7 +7,7 @@ const {storage} = require("../cloudConfig");
 const upload = multer({ storage });
 
 const listingController = require("../controllers/listingController");
-const { isLoggedIn, isAuthor } = require("../middlewares/auth");
+const { isLoggedIn, isAuthor, isHost } = require("../middlewares/auth");
 const validateListing = listingController.listingValidator;
 
 
@@ -22,6 +22,7 @@ router
     .post(
         upload.single("listing[image]"),
         isLoggedIn,
+        isHost,
         validateListing,
         wrapAsync(listingController.createListing)
     );
@@ -33,6 +34,7 @@ router
 router.get(
     "/new",
     isLoggedIn,
+    isHost,
     listingController.renderNewForm
 );
 

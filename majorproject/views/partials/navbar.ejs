@@ -18,7 +18,7 @@
       </div>
 
       <div class="navbar navbar-nav ms-auto me-3 m-0 p-0">
-        <form class="d-flex" role="search" action="/listings?" method="GET">
+        <form class="d-flex" role="search" action="<%= searchAction ? searchAction : '/listings' %>" method="GET">
           <input class="form-control me-2 rounded-pill" type="search" placeholder="Search" aria-label="Search" name="search">
 
             <button class="btn btn-danger d-flex align-items-center gap-2 rounded-pill px-4 " type="submit">
@@ -30,13 +30,61 @@
 
 
       <div class="navbar-nav ms-auto">
-        <a class="nav-link" href="/listings/new">WayPoint your home</a>
+        <!-- <a class="nav-link" href="/listings/new">WayPoint your home</a> -->
         <% if(!currentUser){ %>
 
           <a class="nav-link" href="/signup"><b>Sign Up</b></a>
           <a class="nav-link" href="/login"><b>Log in</b></a>
           <% } else{%>
-            <a class="nav-link" href="/logout"><b>Logout</b></a>
+            <% if(currentUser.role === "host"){ %>
+              <a class="nav-link" href="/listings/new">WayPoint your home</a>
+            <% } %>
+            <div class="dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                <i class="fa-solid fa-circle-user fs-4"></i>
+              </a>
+
+              <ul class="dropdown-menu dropdown-menu-end">
+                <% if(currentUser.role == "host"){ %>
+                <li>
+                  <a class="dropdown-item" href="/my-listings">
+                    <i class="fa-solid fa-list me-2"></i> My Listings
+                  </a>
+                </li>
+                <% } %>
+
+                <% if(currentUser.role !== "host"){ %>
+                  <li>
+                    <form action="/become-host" method="POST">
+                      <button class="dropdown-item" type="submit">
+                        <i class="fa-solid fa-house me-2"></i> Become Host
+                      </button>
+                    </form>
+                  </li>
+                <% } %>
+
+                <li>
+                  <a class="dropdown-item" href="/settings">
+                    <i class="fa-solid fa-gear me-2"></i> Settings
+                  </a>
+                </li>
+
+                <li><hr class="dropdown-divider"></li>
+
+                <li>
+                  <a class="dropdown-item text-danger" href="/logout">
+                    <i class="fa-solid fa-right-from-bracket me-2"></i> Logout
+                  </a>
+                </li>
+
+              </ul>
+            </div>
             <% } %>
       </div>
     </div>
