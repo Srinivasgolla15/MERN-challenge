@@ -7,8 +7,11 @@ const buildQuery = require("../utils/buildQuery");
 
 
 // setting page render
-module.exports.renderSettings = (req, res) => {
-    res.render("userProfile/settings.ejs");
+module.exports.renderSettings = async (req, res) => {
+    const user = await User.findById(req.user._id);
+    const listings = await Listing.find({ owner: req.user._id });
+    const listingCount = listings.length;
+    res.render("userProfile/settings.ejs", { currentUser: user, listingCount });
 };
 
 
@@ -37,4 +40,10 @@ module.exports.mylistings = async (req, res) => {
     // Pass the listings to the template
     res.render("listings/listings.ejs", { allListings, searchAction: "/my-listings" });
 };
+
+ 
+
+
+
+
 

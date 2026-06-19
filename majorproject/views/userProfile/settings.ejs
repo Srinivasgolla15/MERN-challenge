@@ -1,2 +1,62 @@
-<%layout("/layouts/boilerplate")%>
-<h1>Settings</h1>
+<% layout("/layouts/boilerplate") %>
+
+<div class="container mt-5">
+
+    <div class="card shadow-sm">
+        <div class="card-header">
+            <h2 class="mb-0">Account Settings</h2>
+        </div>
+
+        <div class="card-body">
+
+            <ul class="list-group">
+
+                <li class="list-group-item">
+                    <strong>Username:</strong>
+                    <%= currentUser.username %>
+                </li>
+
+                <% if(currentUser.email){ %>
+                    <li class="list-group-item">
+                        <strong>Email:</strong>
+                        <%= currentUser.email %>
+                    </li>
+                <% } %>
+
+                <li class="list-group-item">
+                    <strong>Role:</strong>
+                    <%= currentUser.role %>
+                </li>
+
+                <li class="list-group-item">
+                    <strong>Total Listings:</strong>
+                    <%= listingCount %>
+                </li>
+
+                <li class="list-group-item">
+                    <strong>Member Since:</strong>
+                    <%= currentUser.createdAt.toLocaleDateString() %>
+                </li>
+
+            </ul>
+
+            <% if(currentUser.role === "host"){ %>
+
+                <div class="alert alert-success mt-4">
+                    ✓ You are currently a Host
+                </div>
+
+            <% } else { %>
+
+                <form action="/become-host" method="POST" class="mt-4">
+                    <button class="btn btn-danger">
+                        Become a Host
+                    </button>
+                </form>
+
+            <% } %>
+
+        </div>
+    </div>
+
+</div>
