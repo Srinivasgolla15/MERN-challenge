@@ -25,7 +25,9 @@ export default function History() {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        fetch('http://localhost:5000/history')
+        const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+
+        fetch(`${API_URL}/history`)
             .then(response => response.json())
             .then(data => {
                 setHistory(data);
